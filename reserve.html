@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- box icons cdn link -->
+    <!-- <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" /> -->
+    <title>Jolibee | Reservation Form</title>
+    <link rel="stylesheet" href="assets/styles/reservation.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>Jolibee Reservation Form</header>
+      <form action="index2.php" method="post">
+        <div class="form first">
+          <div class="details personal">
+            <span class="title">Personal Details</span>
+            <div class="fields">
+              <div class="input-field">
+                <label>Customer Name</label>
+                <input type="text" placeholder="Enter Customer Name" name="name" id="name" required />
+              </div>
+              <div class="input-field">
+                <label>Celebrant's name</label>
+                <input type="text" placeholder="Enter Celebrant's Name" name="cname" id="cname" required />
+              </div>
+              <div class="input-field">
+                <label>Mobile Number</label>
+                <input type="number" placeholder="Enter Mobile Number" name="mobile" id="mobile" required />
+              </div>
+
+              <div class="input-field">
+                <label>Gender</label>
+                <select name="gender" id="gender" required />
+                <option disabled selected>Select Gender</option>
+                <option value="male" id>Male</option>
+                <option value="female">Female</option>
+                <option value="others">Others</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Age</label>
+                <input type="number" placeholder="Age" name="age" id="age" required />
+              </div>
+              <div class="input-field">
+                <label>Nickname</label>
+                <input type="text" placeholder="Nickname" name="nickname" id="nickname" required />
+              </div>
+            </div>
+          </div>
+
+          <div class="details ID">
+            <span class="title">Reservation Details</span>
+            <div class="fields">
+              <div class="input-field">
+                <label>Type of Reservation</label>
+                <select name="reservation" id="reservation" required>
+                  <option disabled selected>Select Type</option>
+                  <option value="Instore">In- Store Jollibee Kids Party</option>
+                  <option value="Outstore" id="out">Out - Outside of the Store</option>
+                </select>
+              </div>
+              <div class="input-field">
+                <label>Reservation Date</label>
+                <input type="date" name="rdates" id="rdates" placeholder="Enter Your Issued Date" required />
+              </div>
+              <div class="input-field"></div>
+            </div>
+          </div>
+
+
+
+          <div class="details ID">
+            <span class="title">Choose Your Themes</span>
+            <div class="fields">
+
+
+              <div class="input-field">
+
+                <select name="themes" id="themes" required>
+                <option disabled selected>Select Themes</option>
+                <option value="Party Hats">Party Hats</option>
+                <option value="Invitational Card">Invitational Card</option>
+                <option value="Trayliner">Trayliner</option>
+                <option value="Message Board">Message Board</option>
+
+                </select>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="details ID">
+            <span class="title">Party Favors</span>
+            <div class="fields">
+              <div class="input-field">
+                <select name="favors" id="favors" required>
+                  <option disabled selected>Select Party Favors</option>
+                  <option value="Favor 1">Party Favors 1 = 2000</option>
+                  <option value="Favor 2">Party Favors 2 = 1500</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="details ID">
+            <span class="title">Theme Cake</span>
+            <div class="fields">
+              <div class="input-field">
+                <select name="cake" id="cake" required>
+                  <option disabled selected>Select Theme Cake</option>
+                  <option value="Mocha Cake">Mocha Cake (Hello Kitty = 2000)</option>
+                  <option value="Chocolate Cake">Chocolate Cake (Hello Kitty = 2000)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="details ID">
+            <span class="title">Bundle Meal</span>
+            <div class="fields">
+              <div class="input-field">
+
+                <select name="meal" id="meal" required>
+                  <option disabled selected>Select Bundle Meal</option>
+                  <option value="Meal A">Meal A</option>
+                  <option value="Meal B">Meal B</option>
+                  <option value="Meal C">Meal C</option>
+                  <option value="Meal D">Meal D</option>
+                  <option value="Meal E">Meal E</option>
+                </select>
+              </div>
+            </div>
+            <button class="nextBtn">
+              <span class="btnText">Next</span>
+              <i class="bx bx-skip-next"></i>
+            </button>
+          </div>
+        </div>
+
+
+        <div class="form second">
+          <div class="details address">
+            <span class="title">Payment Options</span>
+            <h3>Send to Gcash: 09486502742 </h3>
+            <div class="fields">
+
+
+
+              <div class="input-field">
+                <label>Payment Option</label>
+                <select name="payment" id="payment" required />
+                <option disabled selected>Select Pay</option>
+                <option value="Pay Minimum Downpayment" id>Pay Minimum Downpayment</option>
+                <option value="Pay in Full">Pay in Full</option>
+
+                </select>
+              </div>
+
+              <fieldset>
+                <legend>
+                  <h3> Terms and Conditon: </h3>
+                </legend>
+
+                <div>
+                  <input type="checkbox" id="agreement" name="agreement" value="agree" required />
+                  <label for="scales">These Terms and Conditions shall apply to all orders of Jollibee products
+                    (“Products”) of a customer through this Jollibee Delivery Website (“Site”). By placing an order for
+                    Products through this Site, you understand, agree with, and accept: (i) these Terms and Conditions and
+                    any corresponding changes thereto which we may implement from time to time; and (ii) our Privacy
+                    Policy in connection with how we process your personal information collected from this Site.For
+                    purposes of these Terms and Conditions, “Jollibee”, “our” or “we” shall refer to Jollibee Foods
+                    Corporation, while “customer” or “you” shall refer to the customer who intends to purchase the
+                    Products from this Site.</label>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="buttons">
+              <div class="backBtn">
+                <i class="bx bx-skip-next"></i>
+                <span class="btnText">Back</span>
+              </div>
+              <button class="sumbit">
+                <span class="btnText">Sumbit</span>
+                <i class="bx bx-skip-next"></i>
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </form>
+    </div>
+    <script src="assets/scripts/reservation.js"></script>
+  </body>
+
+</html>

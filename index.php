@@ -1,31 +1,23 @@
-<?php
-include('config/db.php');
-?>
+<?php include('config/db.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Jollibee: Welcome to Jollitown</title>
-<!-- for-mobile-apps -->
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="keywords" content="Resort Inn Responsive , Smartphone Compatible web template , Samsung, LG, Sony Ericsson, Motorola web design" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
-		function hideURLbar(){ window.scrollTo(0,1); } 
-</script>
-<!-- //for-mobile-apps -->
-<link rel="icon" type="image/png" href="assets/images/favicon.png">
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<link href="css/chocolat.css" rel="stylesheet" type="text/css" media="screen">
-<link href="css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
-<link href="css/flexslider.css" rel="stylesheet" type="text/css" media="screen" property="" />
-<link href="css/jquery-ui.css" rel="stylesheet" />
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
-<script type="text/javascript" src="js/modernizr-2.6.2.min.js"></script>
-<!--fonts-->
-<link href="//fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Federo" rel="stylesheet">
-<link href="//fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet">
+	<title>Jollibee: Welcome to Jollitown</title>
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content="Resort Inn Responsive , Smartphone Compatible web template , Samsung, LG, Sony Ericsson, Motorola web design" />	
+	<script type="application/x-javascript"> 
+		addEventListener("load", function() { 
+			setTimeout(hideURLbar, 0); 
+		}, false);
+
+		function hideURLbar(){ 
+			window.scrollTo(0,1); 
+		} 
+	</script>
+	<!-- //for-mobile-apps -->
+	<?php include('includes/styles_fonts.php'); ?>
 <!--//fonts-->
 </head>
 <body>
@@ -33,97 +25,29 @@ include('config/db.php');
 	<?php include('includes/header.php'); ?>
 	<!-- //header -->
 	<!-- banner -->
-	<div id="home" class="w3ls-banner">
-		<!-- banner-text -->
-		<div class="slider">
-			<div class="callbacks_container">
-				<ul class="rslides callbacks callbacks1" id="slider4">
-					<li>
-						<div class="w3layouts-banner-top">
-
-							<div class="container">
-								<div class="agileits-banner-info">
-						
-									<div class="agileits_w3layouts_more menu__item">
-			<a href="index2.html" class="menu__link">JOLLITOWN BOOK NOW!!</a>
-			</div>
-								</div>	
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="w3layouts-banner-top w3layouts-banner-top1">
-							<div class="container">
-								<div class="agileits-banner-info">
-							
-									<div class="agileits_w3layouts_more menu__item">
-					<a href="index2.html" class="menu__link">JOLLITOWN BOOK NOW!!</a>
-			</div>
-								</div>	
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="w3layouts-banner-top w3layouts-banner-top2">
-							<div class="container">
-								<div class="agileits-banner-info">
-								
-									<div class="agileits_w3layouts_more menu__item">
-											<a href="index2.html" class="menu__link">JOLLITOWN BOOK NOW!!</a>
-										</div>
-								</div>
-							</div>
-						</div>
-					</li>
-				</ul>
-			</div>
-			<div class="clearfix"> </div>
-			<!--banner Slider starts Here-->
-		</div>
-		  
-	</div>	
+	<?php include('includes/banner.php'); ?>
 	<!-- //banner --> 
-<!--//Header-->
-<!-- //Modal1 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
-						<!-- Modal1 -->
-							<div class="modal-dialog">
-							<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-										<h4>SUN  <span>RISE</span></h4>
-										<img src="images/1.jpg" alt=" " class="img-responsive">
-										<h5>We know what you love</h5>
-										<p>Providing guests unique and enchanting views from their rooms with its exceptional amenities, makes Star Hotel one of bests in its kind.Try our food menu, awesome services and friendly staff while you are here.</p>
-									</div>
-								</div>
-							</div>
-						</div>
-<!-- //Modal1 -->
-<div id="availability-agileits">
-<div class="col-md-12 book-form-left-w3layouts">
-	<a href="index2.html"><h2>WELCOME TO JOLIITOWN THEME PARK!!</h2></a>
-</div>
-
-			<div class="clearfix"> </div>
-</div>
-
-
-
-
-
-
+	<!--//Header-->
+	<!-- //Modal1 -->
+	<?php include('includes/modal.php'); ?>
+	<!-- //Modal1 -->
+	<div id="availability-agileits">
+		<div class="col-md-12 book-form-left-w3layouts">
+			<a href="reserve.html"><h2>WELCOME TO JOLIITOWN THEME PARK!!</h2></a>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
 <!-- /about -->
  	<div class="about-wthree" id="about">
 		  <div class="container">
 				   <div class="ab-w3l-spa">
                             <h3 class="title-w3-agileits title-black-wthree">About JolliTown</h3> 
 						   <p class="about-para-w3ls">All our brands are trusted and well-loved, craved around the world:
-Renowned for consistently great tasting food.
-Recognized for high value for money.
-Endeared for warm and sincere distinct service to our customers.
-Admired for our beautiful stores in excellent location.</p>
+								Renowned for consistently great tasting food.
+								Recognized for high value for money.
+								Endeared for warm and sincere distinct service to our customers.
+								Admired for our beautiful stores in excellent location.
+							</p>
 						   <img src="images/abouts2.jpg" class="img-responsive" alt="Hair Salon">
 										<div class="w3l-slider-img">
 											<img src="images/abouts.jpg" class="img-responsive" alt="Hair Salon">
@@ -138,35 +62,7 @@ Admired for our beautiful stores in excellent location.</p>
 </div>
  	<!-- //about -->
 <!--sevices-->
-<div class="advantages" id="service">
-	<div class="container">
-		<div class="advantages-main">
-				<h3 class="title-w3-agileits">Our Services</h3>
-		   <div class="advantage-bottom">
-			 <div class="col-md-6 advantage-grid left-w3ls wow bounceInLeft" data-wow-delay="0.3s">
-			 	<div class="advantage-block ">
-					<i class="fa fa-credit-card" aria-hidden="true"></i>
-			 		<h4>Stay First, Pay After! </h4>
-			 		<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates.</p>
-					<p><i class="fa fa-check" aria-hidden="true"></i>Decorated room, proper air conditioned</p>
-					<p><i class="fa fa-check" aria-hidden="true"></i>Private balcony</p>
-			 		
-			 	</div>
-			 </div>
-			 <div class="col-md-6 advantage-grid right-w3ls wow zoomIn" data-wow-delay="0.3s">
-			 	<div class="advantage-block">
-					<i class="fa fa-clock-o" aria-hidden="true"></i>
-			 		<h4>24 Hour Service</h4>
-			 		<p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates.</p>
-					<p><i class="fa fa-check" aria-hidden="true"></i>24 hours room service</p>
-					<p><i class="fa fa-check" aria-hidden="true"></i>24-hour Concierge service</p>
-			 	</div>
-			 </div>
-			<div class="clearfix"> </div>
-			</div>
-		</div>
-	</div>
-</div>
+<?php include('includes/services.php'); ?>
 <!--//sevices-->
 <!-- team -->
 
@@ -190,13 +86,12 @@ Admired for our beautiful stores in excellent location.</p>
 						<div class="price-gd-bottom">
 							   <div class="price-list">
 									<ul>
-											<li><i class="fa fa-star" aria-hidden="true"></i></li>
-											<li><i class="fa fa-star" aria-hidden="true"></i></li>
-											<li><i class="fa fa-star" aria-hidden="true"></i></li>
-											<li><i class="fa fa-star" aria-hidden="true"></i></li>
-											<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									
-								     </ul>
+										<?php
+											for ($i=1;$i<=5;$i++) {
+												echo "<li><i class='fa fa-star' aria-hidden='true'></i></li>";
+											}
+										?>
+								    </ul>
 							</div>
 							<div class="price-selet">	
 												
@@ -213,12 +108,12 @@ Admired for our beautiful stores in excellent location.</p>
 						</div>
 						<div class="price-gd-bottom">
 							<div class="price-list">
-									<ul>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+								<ul>
+									<?php
+										for ($i=1;$i<=5;$i++) {
+											echo "<li><i class='fa fa-star' aria-hidden='true'></i></li>";
+										}
+									?>
 								</ul>
 							</div>
 							<div class="price-selet">
@@ -237,11 +132,11 @@ Admired for our beautiful stores in excellent location.</p>
 						<div class="price-gd-bottom">
 							<div class="price-list">
 								<ul>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<?php
+										for ($i=1;$i<=5;$i++) {
+											echo "<li><i class='fa fa-star' aria-hidden='true'></i></li>";
+										}
+									?>
 								</ul>
 							</div>
 							<div class="price-selet">
@@ -260,15 +155,15 @@ Admired for our beautiful stores in excellent location.</p>
 						<div class="price-gd-bottom">
 							<div class="price-list">
 								<ul>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
-									<li><i class="fa fa-star" aria-hidden="true"></i></li>
+									<?php
+										for ($i=1;$i<=4;$i++) {
+											echo "<li><i class='fa fa-star' aria-hidden='true'></i></li>";
+										}
+									?>
 									<li><i class="fa fa-star-o" aria-hidden="true"></i></li>
 								</ul>
 							</div>
 							<div class="price-selet">
-
 								<a href="admin/reservation.php" >Book Now</a>
 							</div>
 						</div>
@@ -355,58 +250,19 @@ Admired for our beautiful stores in excellent location.</p>
 	</div>
 </section>
 <!-- /contact -->
-			<div class="copy">
-		        <p>© 2024 JOLLITOWN . All Rights Reserved | Design by <a href="index.php">JOLLIBEE corp.</a> </p>
-		    </div>
+<?php include('includes/footer.php'); ?>
 <!--/footer -->
 <!-- js -->
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-<!-- contact form -->
-<script src="js/jqBootstrapValidation.js"></script>
-
-<!-- /contact form -->	
-<!-- Calendar -->
-		<script src="js/jquery-ui.js"></script>
-		<script>
-				$(function() {
-				$( "#datepicker,#datepicker1,#datepicker2,#datepicker3" ).datepicker();
-				});
-		</script>
-<!-- //Calendar -->
-<!-- gallery popup -->
-<link rel="stylesheet" href="css/swipebox.css">
-				<script src="js/jquery.swipebox.min.js"></script> 
-					<script type="text/javascript">
-						jQuery(function($) {
-							$(".swipebox").swipebox();
-						});
-					</script>
-<!-- //gallery popup -->
+<script type="text/javascript" src="assets/scripts/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="assets/scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="assets/scripts/jquery.swipebox.min.js"></script>
+<script type="text/javascript" src="assets/scripts/jquery.flexslider.js" defer ></script>
+<script type="text/javascript" src="assets/scripts/jqBootstrapValidation.js"></script>
+<script type="text/javascript" src="assets/scripts/jollitown.js"></script>
 <!-- start-smoth-scrolling -->
 <script type="text/javascript" src="js/move-top.js"></script>
 <script type="text/javascript" src="js/easing.js"></script>
-<script type="text/javascript">
-	jQuery(document).ready(function($) {
-		$(".scroll").click(function(event){		
-			event.preventDefault();
-			$('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-		});
-	});
-</script>
 <!-- start-smoth-scrolling -->
-<!-- flexSlider -->
-				<script defer src="js/jquery.flexslider.js"></script>
-				<script type="text/javascript">
-				$(window).load(function(){
-				  $('.flexslider').flexslider({
-					animation: "slide",
-					start: function(slider){
-					  $('body').removeClass('loading');
-					}
-				  });
-				});
-			  </script>
-			<!-- //flexSlider -->
 <script src="js/responsiveslides.min.js"></script>
 			<script>
 						// You can also use "$(window).load(function() {"
@@ -467,16 +323,14 @@ fit: true
 			easingType: 'linear' 
 			};
 		*/								
-		$().UItoTop({ easingType: 'easeOutQuart' });
+			$().UItoTop({ easingType: 'easeOutQuart' });
 		});
 	</script>
 	
 	<div class="arr-w3ls">
-	<a href="#home" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+		<a href="#home" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 	</div>
 <!-- //smooth scrolling -->
-<script type="text/javascript" src="js/bootstrap-3.1.1.min.js"></script>
+	<script type="text/javascript" src="assets/scripts/bootstrap-3.1.1.min.js"></script>
 </body>
 </html>
-
-
