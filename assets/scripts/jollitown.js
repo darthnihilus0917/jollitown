@@ -59,23 +59,50 @@ $(function () {
 
   //NEWSLETTER SIGN-UP
   $("#sign-up").on("click", function () {
+    const fieldStatus = $(".sub-status-result");
     const name = $("#name");
     const phone = $("#phone");
     const email = $("#email");
-    const payload = {
+
+    const fields = [name, phone, email];
+    fields.forEach((field) => {
+      field.on("keyup", function() {
+        fieldStatus.text("");
+      });
+    });
+
+    if (name.val() === "") {
+      fieldStatus.text("Please provide a name").css("color", "pink");
+      return false;
+    } else if (phone.val() === "") {
+      fieldStatus.text("Please provide phone").css("color", "pink");
+      return false;
+    } else if (email.val() === "") {
+      fieldStatus.text("Please provide email").css("color", "pink");
+      return false;
+    } else {
+      const payload = {
         name: name.val(),
         phone: phone.val(),
         email: email.val(),
         approval: "Not Allowed"
-    };
-    $.ajax({
-        method: 'POST',
-        url: 'index.php',
-        data: payload
-    }).success(function() {
-        name.val("");
-        phone.val("");
-        email.val("");
-    })
+      };
+      $.ajax({
+          method: 'POST',
+          url: 'index.php',
+          data: payload,
+          beforeSend: function() {
+            $(this).attr("disabled", false).text("Sending...");
+          },
+          success: function(data) {
+            console.log(data)
+            fieldStatus.text("Subscribed!").css("color", "lightgreen");
+            $(this).attr("disabled", false).text("Send Now");
+            name.val("");
+            phone.val("");
+            email.val("");
+          }
+      });
+    }
   });
 });

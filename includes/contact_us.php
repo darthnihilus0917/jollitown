@@ -22,7 +22,7 @@
         </div>
         
         <input type="button" name="sub" id="sign-up" value="Send Now" class="btn btn-primary">
-        <span id="sub-status" class="contact-agile2">Test</span>
+        <span id="sub-status" class="sub-status-result"></span>
     </div>
     <?php
     if(isset($_POST['name']))

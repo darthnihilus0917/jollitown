@@ -7,6 +7,7 @@
 <link href="assets/styles/jquery-ui.css" rel="stylesheet" />
 <link href="assets/styles/swipebox.css" rel="stylesheet" >
 <link href="assets/styles/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="assets/styles/jollitown.css" rel="stylesheet" type="text/css" media="all" />
 <script type="text/javascript" src="assets/scripts/modernizr-2.6.2.min.js"></script>
 <!--fonts-->
 <link href="//fonts.googleapis.com/css?family=Oswald:300,400,700" rel="stylesheet">
