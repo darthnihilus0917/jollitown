@@ -51,13 +51,14 @@ $(function () {
     type: "vertical",
     width: "auto",
     fit: true,
-  });  
+  });
 
   $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker();
 
-  $().UItoTop({ easingType: 'easeOutQuart' });
+  $().UItoTop({ easingType: "easeOutQuart" });
 
-  $("#sign-up").on("click", function() {
-      console.log("test")
-  })
+  //NEWSLETTER SIGN-UP
+  $("#sign-up").on("click", function () {
+    console.log("test");
+  });
 });
