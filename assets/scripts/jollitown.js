@@ -71,14 +71,26 @@ $(function () {
       });
     });
 
+    function validateEmail(email) {
+      // Regular expression to validate email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function validatePhoneNumber(phoneNumber) {
+      // Regular expression to validate phone number
+      const phoneRegex = /^\d{10,15}$/;
+      return phoneRegex.test(phoneNumber);
+    }
+
     if (name.val() === "") {
       fieldStatus.text("Please provide a name").css("color", "pink");
       return false;
-    } else if (phone.val() === "") {
-      fieldStatus.text("Please provide phone").css("color", "pink");
+    } else if (phone.val() === "" || !validatePhoneNumber(phone.val())) {
+      fieldStatus.text("Please provide a valid phone").css("color", "pink");
       return false;
-    } else if (email.val() === "") {
-      fieldStatus.text("Please provide email").css("color", "pink");
+    } else if (email.val() === "" || !validateEmail(email.val())) {
+      fieldStatus.text("Please provide a valid email").css("color", "pink");
       return false;
     } else {
       const payload = {
@@ -95,8 +107,7 @@ $(function () {
             $(this).attr("disabled", false).text("Sending...");
           },
           success: function(data) {
-            console.log(data)
-            fieldStatus.text("Subscribed!").css("color", "lightgreen");
+            fieldStatus.text("Subscribed!").css("color", "lightgreen").fadeOut(5000);
             $(this).attr("disabled", false).text("Send Now");
             name.val("");
             phone.val("");
