@@ -12,13 +12,12 @@
 			setTimeout(hideURLbar, 0); 
 		}, false);
 
-		function hideURLbar(){ 
+		function hideURLbar() { 
 			window.scrollTo(0,1); 
 		} 
 	</script>
 	<!-- //for-mobile-apps -->
 	<?php include('includes/styles_fonts.php'); ?>
-<!--//fonts-->
 </head>
 <body>
 	<!-- header -->
@@ -27,17 +26,12 @@
 	<?php include('includes/banner.php'); ?>	
 	<!-- modal -->
 	<?php include('includes/modal.php'); ?>
-	<div id="availability-agileits">
-		<div class="col-md-12 book-form-left-w3layouts">
-			<a href="reserve.html"><h2>WELCOME TO JOLIITOWN THEME PARK!!</h2></a>
-		</div>
-		<div class="clearfix"> </div>
-	</div>
+	<!-- welcome -->
+	<?php include('includes/welcome.php'); ?>
 	<!-- about -->
-	<?php include('includes/about.php'); ?> 	
+	<?php include('includes/about.php'); ?>
 	<!--sevices-->
 	<?php include('includes/services.php'); ?>
-
 	<!-- rooms & rates -->
 	<section id="theme">
 		<div class="plans-section" id="menu">

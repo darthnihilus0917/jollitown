@@ -21,20 +21,18 @@
             <p class="help-block"></p>
         </div>
         
-        <input type="button" name="sub" id="sign-up" value="Send Now" class="btn btn-primary">	
+        <input type="button" name="sub" id="sign-up" value="Send Now" class="btn btn-primary">
+        <span id="sub-status" class="contact-agile2">Test</span>
     </div>
     <?php
-    if(isset($_POST['sub']))
+    if(isset($_POST['name']))
     {
         $name =$_POST['name'];
         $phone = $_POST['phone'];
         $email = $_POST['email'];
         $approval = "Not Allowed";
-        $sql = "INSERT INTO `contact`(`fullname`, `phoneno`, `email`,`cdate`,`approval`) VALUES ('$name','$phone','$email',now(),'$approval')" ;
-        
-        
-        if(mysqli_query($con,$sql))
-        echo"OK";					
+        $sql = "INSERT INTO `contact`(`fullname`, `phoneno`, `email`,`cdate`,`approval`) VALUES ('$name','$phone','$email',now(),'$approval')";
+        if (mysqli_query($con,$sql)) echo"OK";
     }
     ?>
 </div>

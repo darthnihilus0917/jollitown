@@ -59,6 +59,23 @@ $(function () {
 
   //NEWSLETTER SIGN-UP
   $("#sign-up").on("click", function () {
-    console.log("test");
+    const name = $("#name");
+    const phone = $("#phone");
+    const email = $("#email");
+    const payload = {
+        name: name.val(),
+        phone: phone.val(),
+        email: email.val(),
+        approval: "Not Allowed"
+    };
+    $.ajax({
+        method: 'POST',
+        url: 'index.php',
+        data: payload
+    }).success(function() {
+        name.val("");
+        phone.val("");
+        email.val("");
+    })
   });
 });
