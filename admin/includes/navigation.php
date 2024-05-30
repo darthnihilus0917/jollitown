@@ -13,9 +13,9 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link d-flex align-items-center gap-2" href="?page=products">
+        <a class="nav-link d-flex align-items-center gap-2" href="?page=customers">
         <svg class="bi"><use xlink:href="#cart"/></svg>
-        Products
+        Customers
         </a>
     </li>
     <li class="nav-item">

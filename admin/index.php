@@ -72,6 +72,9 @@ function getPageParameter() {
         <?php
         $page = getPageParameter();
         switch($page) {
+            case "users":
+                include('pages/user.php');
+                break;
             case "reservations":
                 include('pages/reservation.php');
                 break;

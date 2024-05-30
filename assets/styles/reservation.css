@@ -184,3 +184,17 @@ form .buttons {
     width: 100%;
   }
 }
+
+fieldset > legend {
+  color: #fff !important;
+}
+
+h1 {
+  color: #fff !important;
+  text-align: center;
+}
+
+.select-field {
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
+}
