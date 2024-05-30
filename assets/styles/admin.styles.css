@@ -140,3 +140,33 @@ body {
   .nav-link {
     color: rgba(220, 53, 69, 1) !important;
   }
+
+  ul.nav > li.nav-item .nav-link:hover {
+    background-color: rgba(220, 53, 69, 1) !important;
+    color: #fff !important;
+  }
+
+  #reservations-table thead tr th,
+  #user-table thead tr th {
+    text-align: center !important;
+    vertical-align: middle;
+    background-color: rgba(220, 53, 69, 1) !important;
+    color: #fff !important;    
+  }
+
+  ul.pagination li.dt-paging-button .page-item .active {
+    background-color: rgba(220, 53, 69, 1) !important;
+    color: #fff !important;    
+  }
+
+  #reservation-calendar table thead {
+    background-color: rgba(220, 53, 69, 1) !important;
+    color: #fff !important;  
+  }
+  #reservation-calendar table thead a {
+    color: #fff !important; 
+    text-decoration: none; 
+  }
+  #reservation-calendar table tbody tr td {
+    background-color: #fff !important;
+  }

@@ -3,14 +3,7 @@
 $appName = "Jollitown Reservation System";
 
 function getPageParameter() {
-    // Check if the 'page' parameter exists in the URL
-    if (isset($_GET['page'])) {
-        // Return the value of the 'page' parameter
-        return $_GET['page'];
-    } else {
-        // Return a default value or null if 'page' parameter is not set
-        return null;
-    }
+    return (isset($_GET['page'])) ? $_GET['page'] : null;
 }
 ?>
 <!doctype html>
@@ -26,6 +19,8 @@ function getPageParameter() {
     <link rel="icon" href="../assets/images/favicon.png" sizes="32x32" type="image/png">
     <link rel="icon" href="../assets/images/favicon.png" sizes="16x16" type="image/png">
     <link rel="icon" type="image/png" href="../assets/images/favicon.png" />
+    <link rel="stylesheet" href="../assets/scripts/datatables.css" />
+    <link rel="stylesheet" href="../assets/scripts/datatables.min.css" />
     <link rel="stylesheet" href="../assets/styles/admin.styles.css" />
     <meta name="theme-color" content="#712cf9">
 
@@ -33,10 +28,6 @@ function getPageParameter() {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
   </head>
   <body>
-    <?php include('includes/theme_icons.php'); ?>
-
-    <?php include('includes/themes.php'); ?>
-    
     <?php include('includes/icons.php'); ?>
 
 <header class="navbar sticky-top bg-danger flex-md-nowrap p-0 shadow" data-bs-theme="dark">
@@ -72,12 +63,24 @@ function getPageParameter() {
         <?php
         $page = getPageParameter();
         switch($page) {
+            case "reports":
+                include('pages/reports.php');
+                break;            
+            case "settings":
+                include('pages/settings.php');
+                break;            
+            case "customers":
+                include('pages/customers.php');
+                break;            
             case "users":
                 include('pages/user.php');
                 break;
             case "reservations":
                 include('pages/reservation.php');
                 break;
+            case "calendar":
+                include('pages/calendar.php');
+                break;                
             default:
                 include('pages/dashboard.php');
         }
@@ -85,7 +88,11 @@ function getPageParameter() {
     </main>
   </div>
 </div>
-    <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.2/dist/chart.umd.js" integrity="sha384-eI7PSr3L1XLISH8JdDII5YN/njoSsxfbrkCTnJrzXt+ENP5MOVBxD+l6sEG4zoLp" crossorigin="anonymous"></script>
-    <script src="https://getbootstrap.com/dashboard.js"></script></body>
+    <script src="../assets/scripts/jquery-2.1.4.min.js"></script>
+    <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/scripts/datatables.js"></script>
+    <script src="../assets/scripts/datatables.min.js"></script>
+    <script src="../assets/scripts/fullcalendar-6.1.13/dist/index.global.min.js"></script>    
+    <script src="../assets/scripts/admin.jollitown.js"></script>
+</body>
 </html>
