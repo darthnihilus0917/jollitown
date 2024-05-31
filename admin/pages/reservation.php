@@ -40,7 +40,7 @@ $reservationPageTitle = ($isCalendar) ? "Calendar of Reservation" : "Reservation
         </a>  
     </div>    
 </div>
-<div class="container">
+<div class="container-fluid">
     <?php
         if (!$isCalendar) {
             include('datatables/reservations_table.php');

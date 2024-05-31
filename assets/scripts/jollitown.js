@@ -86,7 +86,7 @@ $(function () {
     if (name.val() === "") {
       fieldStatus.text("Please provide a name").css("color", "pink");
       return false;
-    } else if (phone.val() === "" || !validatePhoneNumber(phone.val())) {
+    } else if (phone.val() === "") {
       fieldStatus.text("Please provide a valid phone").css("color", "pink");
       return false;
     } else if (email.val() === "" || !validateEmail(email.val())) {

@@ -1,7 +1,7 @@
 <?php
 function highlighter($linkName) {
     $page = $_GET['page'];
-    if (empty($page)) return "active";
+    if (empty($page)) return "";
 
     return ($linkName == $page) ? "active" : "";
 }

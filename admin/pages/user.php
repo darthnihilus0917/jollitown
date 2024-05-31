@@ -25,7 +25,7 @@ $newLink = "?page=users&process=new";
         <?php } ?>
     </div>
 </div>
-<div class="container">
+<div class="container-fluid">
     <?php
         if (isset($_GET['process'])) {
             $process = $_GET['process'];

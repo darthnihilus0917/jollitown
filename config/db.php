@@ -1,7 +1,8 @@
 <?php
-$server = "localhost:3306";
+$server = "localhost:3307";
 $user = "root";
-$password = "masteradmin";
-$schema = "jollitowns";
-$con = mysqli_connect($server,$user,$password,$schema) or die(mysql_error());
+$password = "";
+$schema = "jobee";
+$conn = new mysqli($server, $user, $password, $schema);
+if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 ?>
