@@ -3,13 +3,10 @@
     <thead>
         <tr>
             <th>ID</th>
-            <th>Customer Name</th>
-            <th>Celebrant Name</th>
             <th>Booked Date</th>
-            <th>Theme</th>
-            <th>Favors</th>
-            <th>Cake</th>
-            <th>Meal</th>
+            <th>Celebrant Name</th>
+            <th>From Customer Name</th>
+            <th>Event Done?</th>
             <th>Date Created</th>
             <th>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
@@ -29,27 +26,23 @@
                 $clientName = $row["name"];
                 $celebrantName = $row["cname"];
                 $reservationDate = $row["rdates"];
-                $theme = $row["themes"];
-                $favors = $row["favors"];
-                $cake = $row["cake"];
-                $meal = $row["meal"];
+                $isDone = ($row["is_done"] == 0) 
+                    ? "<span class='text-danger fw-bold'>NOT YET</span>" 
+                    : "<span class='text-success fw-bold'>YES</span>";
                 $dateCreated = $row["date_created"];
                 ?>
                 <tr>
                     <td class="text-center"><?php echo $id; ?></td>
-                    <td><?php echo $clientName; ?></td>
-                    <td><?php echo $celebrantName; ?></td>
                     <td class="text-center">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar-event" viewBox="0 0 16 16">
                             <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
                             <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
                         </svg>
                         <span class="ps-1"><?php echo $reservationDate; ?></span>
-                    </td>
-                    <td><?php echo $theme; ?></td>
-                    <td><?php echo $favors; ?></td>
-                    <td><?php echo $cake; ?></td>
-                    <td><?php echo $meal; ?></td>
+                    </td>                    
+                    <td><?php echo $celebrantName; ?></td>                    
+                    <td><?php echo $clientName; ?></td>
+                    <td class="text-center"><?php echo $isDone; ?></td>
                     <td class="text-center"><?php echo $dateCreated; ?></td>
                     <td class="text-center">
                         <a href="?page=reservations&process=edit&id=<?php echo $id ?>" class="btn btn-warning" title="Edit">

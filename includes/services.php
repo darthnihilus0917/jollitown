@@ -26,4 +26,11 @@
 			</div>
 		</div>
 	</div>
+	<!-- <div class="clearfix"></div>
+	<div class="container" style="margin-top: 30px;">
+		<h3 class="title-w3-agileits">Calendar of Events</h3>
+		<div class="advantages-main">
+			<div id="reservation-calendar"></div>
+		</div>
+	</div> -->
 </div>

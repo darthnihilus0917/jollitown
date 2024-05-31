@@ -3,6 +3,6 @@
 </div>
 <div class="container-fluid">
     <?php
-        include('datatables/users_table.php');
+        include('datatables/customers_table.php');
     ?>
 </div>
