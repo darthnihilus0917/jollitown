@@ -14,8 +14,7 @@
             </ul>
         </div>
         <div class="price-selet">
-        
-            <a href="admin/reservation.php" >Book Now</a>
+            <a data-toggle="modal" data-target="#reservationModal">Book Now</a>
         </div>
     </div>
 </div>

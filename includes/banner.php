@@ -8,7 +8,7 @@
 							<div class="container">
 								<div class="agileits-banner-info">						
 									<div class="agileits_w3layouts_more menu__item">
-										<a href="reserve.html" class="menu__link">JOLLITOWN BOOK NOW!!</a>
+										<a class="menu__link" data-toggle="modal" data-target="#reservationModal">JOLLITOWN BOOK NOW!!</a>
 									</div>
 								</div>	
 							</div>

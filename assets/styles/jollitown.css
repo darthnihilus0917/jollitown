@@ -1,0 +1,39 @@
+.price-selet a {
+    cursor: pointer !important;
+}
+
+#reservationModal .modal-header {
+    background-color: #8f001b !important;
+}
+
+#reservationModal .modal-header .modal-title {
+    text-align: center !important;
+    color: gold !important;
+}
+
+#reservationModal .moda-body h3 {
+    text-align: center !important;
+}
+
+#reservationModal .moda-body h3,
+#reservationModal .moda-body h4 {
+    color: rgba(220, 53, 69, 1) !important;
+}
+
+.rounded-wrapper {
+    margin-top: 20px;
+    background-color: #ccc !important;
+    padding: 8px;
+    border-radius: 4px 4px 4px 4px;
+}
+
+.rounded-wrapper h3.terms-title {
+    text-align: center;
+    margin-bottom: 3px;
+    color: rgba(220, 53, 69, 1) !important;
+}
+
+.divider {
+    border-bottom: solid 1px #ccc;
+    border-style: dashed;
+}

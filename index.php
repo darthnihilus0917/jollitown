@@ -26,6 +26,7 @@
 	<?php include('includes/banner.php'); ?>	
 	<!-- modal -->
 	<?php include('includes/modal.php'); ?>
+	<?php include('includes/reservation_modal.php'); ?>
 	<!-- welcome -->
 	<?php include('includes/welcome.php'); ?>
 	<!-- about -->

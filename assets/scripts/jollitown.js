@@ -57,6 +57,12 @@ $(function () {
 
   $().UItoTop({ easingType: "easeOutQuart" });
 
+  // RESERVATION
+  const booking = $("#customer-booking-btn");
+  booking.on("click", function() {
+    console.log('testing')
+  });
+
   //NEWSLETTER SIGN-UP
   $("#sign-up").on("click", function () {
     const fieldStatus = $(".sub-status-result");
@@ -122,5 +128,5 @@ $(function () {
   const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth'
   });
-  calendar.render();  
+  calendar.render();
 });
