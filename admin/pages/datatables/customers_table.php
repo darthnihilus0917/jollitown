@@ -80,16 +80,11 @@ include('./../config/db.php');
         } else {
             ?>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <?php
+                for($i=1;$i<=10;$i++){
+                    echo "<td></td>";
+                }
+                ?>
             </tr>
             <?php
         }

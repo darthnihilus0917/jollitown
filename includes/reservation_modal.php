@@ -52,6 +52,10 @@
 
         <h3>Reservation</h3>
         <div class="container-response p-4">
+            <ul style="margin-left: 14px;">
+                <li>Venue reservation is good for two (2) hours, which also includes the host.</li>
+                <li>Party schedule has 3 schedules per day: 10AM-12PM | 1-3PM | 4-6PM.</li>
+            </ul>
             <div class="row" style="padding-top: 4px;">
                 <div class="col-lg-4">
                     <label for="">Reservation Type</label><br/>

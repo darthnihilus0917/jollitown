@@ -2349,9 +2349,24 @@ color: #fff !important;
 		border: none;
 		position: absolute;
 		width: 100%;
-		background: #a5a5a5;
+		background-color: #8f001b !important;
+		/* background: #a5a5a5; */
 		z-index: 999;
 	}
+
+	nav ul {
+		background-color: #8f001b !important;
+		margin-bottom: 0px !important;
+		padding-bottom: 0px !important;
+	}
+
+	.social-bnr-agileits {
+		float: none;
+		margin: 0;
+		text-align: center !important;
+		margin-bottom: 20px !important;
+	}
+
 	.navbar-toggle {
 		margin: .8em 0 0;
 	}

@@ -53,11 +53,11 @@
         } else {
             ?>
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <?php
+                for($i=1;$i<=6;$i++){
+                    echo "<td></td>";
+                }
+                ?>
             </tr>
             <?php
         }

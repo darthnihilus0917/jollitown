@@ -1,8 +1,28 @@
 <?php
+include('./../config/db.php'); 
+
+$process = $_GET['process'];
+$field = null;
+$id = 0;
+if ($process == "edit" || $process == "delete") {
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM booking WHERE id = '". $id ."'";
+    $field = $conn->query($sql)->fetch_assoc();
+} 
+
 $isAdmin = true;
 $fieldStatus = ($isAdmin) ? "" : "readonly";
+$fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
 ?>
 <div class="form-wrapper">
+    <div class="row">
+        <p class="fw-bold">
+            All fields are required.
+        </p>
+        <p>
+            <strong>REMINDER:</strong> Venue reservation is good for two (2) hours, which also includes the host.
+        </p>
+    </div>
     <div class="row mb-2">
         <div class="col-lg-2 label-placeholder">
             <label for="">Celebrant's Full Name:</label>
