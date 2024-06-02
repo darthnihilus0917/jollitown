@@ -45,7 +45,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Mobile Number:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="number" id="customer-mobile-no" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['mobile'] : "" ?>"/>
+            <input class="form-control" type="number" id="customer-mobile" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['mobile'] : "" ?>"/>
         </div>
     </div>
     <!-- <div class="row mb-2">
@@ -130,7 +130,31 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Event Date & Time:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="datetime-local" name="customer-event-date" id="customer-event-date" placeholder="Event Date" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['event_datetime'] : "" ?>"/>
+            <input class="form-control" type="datetime-local" name="customer-event-date" id="customer-event-date" placeholder="Event Date" <?php echo $fieldDisabled ?> value="<?php echo ($field != null) ? $field['event_datetime'] : "" ?>"/>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-lg-2 label-placeholder">
+            <label for="">Theme:</label>
+        </div>
+        <div class="col-lg-10">
+            <select class="form-control" name="party-theme" id="customer-theme">
+                <option>Select a theme</option>
+            <?php
+                $theme = ['Party Hats', 'Invitational Card', 'Trayliner', 'Message Board'];
+                for($i=0;$i<count($theme);$i++) {
+                    $value = ($field != null) ? $field['themes'] : "";
+                    var_dump($value);
+                    $selected = "";
+                    if ($value != "") {
+                        $selected = ($value == $theme[$i]) ? "selected" : "";
+                    }
+                    ?>
+                    <option value="<?php echo $theme[$i] ?>" <?php echo $selected ?>><?php echo $theme[$i] ?></option>
+                    <?php
+                }
+            ?>
+            </select>
         </div>
     </div>
     <div class="row mb-2">
@@ -184,7 +208,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Bundle Meal:</label>
         </div>
         <div class="col-lg-10">
-            <select class="form-select" name="bundle-meal" id="customer-meal" <?php echo $fieldStatus ?>>
+            <select class="form-select" name="bundle-meal" id="bundle-meal" <?php echo $fieldStatus ?>>
                 <option value="0">Select a meal</option>
             <?php
                 $meal = ['A', 'B', 'C', 'D', 'E'];
@@ -207,7 +231,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Payment Option:</label>
         </div>
         <div class="col-lg-10">
-            <select class="form-control" name="payment-terms" id="payment-mode" <?php echo $fieldStatus ?>>
+            <select class="form-control" name="payment-mode" id="payment-mode" <?php echo $fieldDisabled ?>>
                 <?php
                     $value = ($field != null) ? $field['payment_mode'] : "";
                     $selected = "";
@@ -227,9 +251,10 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Payment Terms:</label>
         </div>
         <div class="col-lg-10">
-            <select class="form-control" name="payment-terms" id="payment-terms" <?php echo $fieldStatus ?>>
+            <select class="form-control" name="payment-terms" id="payment-terms" <?php echo $fieldDisabled ?>>
                 <?php
                     $value = ($field != null) ? $field['payment'] : "";
+                    var_dump($value);
                     $selected = "";
                     if ($value != "") {
                         $partialSelected = ($value == "Partial") ? "selected" : "";
@@ -252,10 +277,18 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
     </div>
     <div class="row mb-2">
         <div class="col-lg-2 label-placeholder">
+            <label for="">Payment Balance:</label>
+        </div>
+        <div class="col-lg-10">
+            <input class="form-control" type="number" name="payment-balance" id="payment-balance" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['payment_balance'] : "" ?>"/>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-lg-2 label-placeholder">
             <label for="">Event Done?</label>
         </div>
         <div class="col-lg-10">
-            <select class="form-select" name="event-status" id="event-status" <?php echo $fieldStatus ?>>
+            <select class="form-select" name="event-status" id="event-status" <?php echo $fieldDisabled ?>>
                 <?php
                 $value = ($field != null) ? $field['is_done'] : "";
                 $selected = "";
@@ -274,14 +307,26 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
 </div>
 <div class="button-section mt-2">
     <div class="row mb-2">
-        <div class="col-lg-2">
-            <button class="btn btn-success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
-                <path d="M11 2H9v3h2z"/>
-                <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
-                </svg>
-                <span class="ps-2">Save</span>
-            </button>
-        </div>
+        <?php 
+        if ($process == "delete") {
+        ?>
+            <div class="col-lg-8">
+                <button class="btn btn-danger" id="customer-save">
+                    <span class="px-4">Delete this record? Click to proceed</span>
+                </button>
+                <span id="process-result" class="ps-2 fw-bold"></span>
+            </div>             
+        <?php
+        } else {
+            ?>
+            <div class="col-lg-6">
+                <button class="btn btn-success" id="customer-save">
+                    <span class="px-4">Save</span>
+                </button>
+                <span id="process-result" class="ps-2 fw-bold"></span>
+            </div>            
+            <?php
+        }
+        ?>
     </div>
 </div>

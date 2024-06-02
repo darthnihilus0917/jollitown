@@ -30,6 +30,93 @@ $(function() {
         return result.includes(true);
     }
 
+    // CUSTOMER
+    const customerSave = $("#customer-save");
+    customerSave.on("click", function() {
+        const process = $("#process");
+        const celebrantName = $("#celebrant-name");
+        const customerName = $("#customer-name");
+        const mobile = $("#customer-mobile");
+        const age = $("#customer-age");
+        const gender = $("#customer-gender");
+        const nickname = $("#customer-nickname");
+        const customerReservationType = $("#customer-reservation-type");
+        const customerReservationDate = $("#customer-reservation-date");
+        const eventDateTime = $("#customer-event-date");
+        const evenStatus = $("#event-status");
+        const favors = $("#customer-favors");
+        const cake = $("#customer-cake");
+        const meal = $("#bundle-meal");
+        const theme = $("#customer-theme");
+        const paymentMode = $("#payment-mode");
+        const paymentTerms = $("#payment-terms");
+        const amount = $("#payment-amount");
+        const balance = $("#payment-balance");
+
+        const fields = [celebrantName, customerName, mobile, age, gender, nickname, 
+            customerReservationType, customerReservationDate, eventDateTime, evenStatus,
+            favors, cake, meal, theme, paymentMode, paymentTerms, amount, balance];
+        fields.forEach((field) => {
+            field.on("keyup", function() { processResult.text("");});
+            field.on("change", function() { processResult.text(""); });
+        });
+
+        const payload = {
+            module: 'customers',
+            process: process.val(),
+            id: process.attr('data-id'),
+            celebrantName: celebrantName.val(),
+            customerName: customerName.val(),
+            eventDateTime: eventDateTime.val(),
+            eventStatus: evenStatus.val(),
+            reservationType: customerReservationType.val(),
+            reservationDate: customerReservationDate.val(),
+            mobile: mobile.val(),
+            age: age.val(),
+            gender: gender.val(),
+            nickname: nickname.val(),
+            favors: favors.val(),
+            cake: cake.val(),
+            meal: meal.val(),
+            theme: theme.val(),
+            paymentMode: paymentMode.val(),
+            paymentTerms: paymentTerms.val(),
+            amount: amount.val(),
+            balance: balance.val()
+        }
+        console.log(payload)
+
+        let resultCss = null;
+        if (hasInvalid(fields)) {
+            resultCss =  {"color":"red"};
+            processResult.text("Please provide a valid value(s).").css(resultCss);
+            return false;
+
+        } else {
+            $.ajax({
+                method: 'POST',
+                url: './process.php',
+                data: payload,
+                beforeSend: function() {
+                    $(this).text("Saving...").attr("disabled", true);
+                },
+                success: function(data) {
+                    $(this).text("Save").attr("disabled", false);
+                    const { isProcessed, msg } = JSON.parse(data);
+                    if (isProcessed) {
+                        if (payload.process === 'new') reset();
+                        resultCss =  {"color":"green"};
+                    } else {
+                        resultCss =  {"color":"red"};
+                    }
+                    processResult.text(msg).css(resultCss);
+                    if (payload.process === 'edit') location.reload();
+                    if (payload.process === 'delete') window.location.href = `?page=users`;
+                }
+            });
+        }
+    });
+
     // RESERVATION
     const reservationSave = $("#reservation-save");
     reservationSave.on("click", function() {
@@ -60,28 +147,36 @@ $(function() {
         }
         console.log(payload)
 
-        $.ajax({
-            method: 'POST',
-            url: './process.php',
-            data: payload,
-            beforeSend: function() {
-                $(this).text("Saving...").attr("disabled", true);
-            },
-            success: function(data) {
-                console.log(data)
-                $(this).text("Save").attr("disabled", false);
-                const { isProcessed, msg } = JSON.parse(data);
-                if (isProcessed) {
-                    resultCss =  {"color":"green"};
-                } else {
-                    resultCss =  {"color":"red"};
+        let resultCss = null;
+        if (hasInvalid(fields)) {
+            resultCss =  {"color":"red"};
+            processResult.text("Please provide a valid value(s).").css(resultCss);
+            return false;
+
+        } else {
+            $.ajax({
+                method: 'POST',
+                url: './process.php',
+                data: payload,
+                beforeSend: function() {
+                    $(this).text("Saving...").attr("disabled", true);
+                },
+                success: function(data) {
+                    console.log(data)
+                    $(this).text("Save").attr("disabled", false);
+                    const { isProcessed, msg } = JSON.parse(data);
+                    if (isProcessed) {
+                        resultCss =  {"color":"green"};
+                    } else {
+                        resultCss =  {"color":"red"};
+                    }
+                    processResult.text(msg).css(resultCss);
+                    if (payload.process === 'edit') {
+                        setTimeout(() => { location.reload(); }, 3000);
+                    }
                 }
-                processResult.text(msg).css(resultCss);
-                if (payload.process === 'edit') {
-                    setTimeout(() => { location.reload(); }, 3000);
-                }
-            }
-        });
+            });
+        }
     });
 
     // USER
@@ -120,7 +215,7 @@ $(function() {
             email: email.val()
         }
 
-        let resultCss = null
+        let resultCss = null;
         if (hasInvalid(fields)) {
             resultCss =  {"color":"red"};
             processResult.text("Please provide a valid value(s).").css(resultCss);
