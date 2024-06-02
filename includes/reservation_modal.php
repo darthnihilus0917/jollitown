@@ -10,7 +10,7 @@
             <div class="row" style="padding-top: 4px;">
                 <div class="col-lg-12">
                     <label for="">Celebrant's Full Name</label><br/>
-                    <input class="form-control" type="text" name="celebrants-name" id="celebrants-name" placeholder="Celebrant's Name"/>
+                    <input class="form-control" type="text" name="celebrant-name" id="celebrant-name" placeholder="Celebrant's Name"/>
                 </div>
             </div>
             <div class="row" style="padding-top: 4px;">
@@ -20,7 +20,7 @@
                 </div>
                 <div class="col-lg-4">
                     <label for="">Mobile Number</label><br/>
-                    <input class="form-control" type="text" name="customer-mobile-no" id="customer-mobile-no" placeholder="Mobile No."/>
+                    <input class="form-control" type="number" name="customer-mobile" id="customer-mobile" placeholder="Mobile No."/>
                 </div>
                 <div class="col-lg-4">
                     <label for="">Email Address</label><br/>
@@ -99,7 +99,7 @@
                         $favors = ['2000', '1500'];
                         for($i=0;$i<count($favors);$i++) {
                             ?>
-                            <option value="Party Favors <?php echo $i+1 . " = " . $favors[$i] ?>">Party Favors <?php echo $i+1 . " = " . $favors[$i] ?></option>
+                            <option value="<?php echo $favors[$i] ?>">Party Favors <?php echo $i+1 . " = " . $favors[$i] ?></option>
                             <?php
                         }
                     ?>
@@ -113,7 +113,7 @@
                         $cake = ['Mocha Cake', 'Chocolate Cake'];
                         for($i=0;$i<count($cake);$i++) {
                             ?>
-                            <option value="<?php echo $cake[$i] ?> (Hello Kitty = 2000)"><?php echo $cake[$i] ?> (Hello Kitty = 2000)</option>
+                            <option value="<?php echo $cake[$i] ?>"><?php echo $cake[$i] ?> (Hello Kitty = 2000)</option>
                             <?php
                         }
                     ?>
@@ -121,13 +121,13 @@
                 </div>
                 <div class="col-lg-4">
                     <label for="">Bundle Meal</label><br/>
-                    <select class="form-control" name="bundle-meal" id="customer-meal">
+                    <select class="form-control" name="bundle-meal" id="bundle-meal">
                         <option value="0">Select a meal</option>
                     <?php
                         $meal = ['A', 'B', 'C', 'D', 'E'];
                         for($i=0;$i<count($meal);$i++) {
                             ?>
-                            <option value="Meal - <?php echo $meal[$i] ?>">Meal - <?php echo $meal[$i] ?></option>
+                            <option value="<?php echo $meal[$i] ?>">Meal - <?php echo $meal[$i] ?></option>
                             <?php
                         }
                     ?>
@@ -151,11 +151,10 @@
                 </div>
                 <div class="col-lg-4">
                     <label for="">Payment Terms</label><br/>
-                    <!-- <input class="form-control" type="text" name="payment-terms" id="payment-terms" /> -->
                     <select class="form-control" name="payment-terms" id="payment-terms">
                         <option value="0"> Select a payment terms</option>
-                        <option value="Partial Payment">Partial Payment (Downpayment)</option>
-                        <option value="Full Payment">Full Payment</option>
+                        <option value="Partial">Partial Payment (Downpayment)</option>
+                        <option value="Full">Full Payment</option>
                     </select>
                 </div>
                 <div class="col-lg-4">
@@ -175,6 +174,9 @@
                 </p>
                 <hr/>
                 <input type="checkbox" id="agree-to-terms"/> I agree and accept
+            </div>
+            <div style="padding-top:8px; padding-bottom: 10px; text-align: center;">
+                <span class="submission-status"></span>
             </div>
         </div>
       </div>

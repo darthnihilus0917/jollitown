@@ -43,7 +43,7 @@ function highlighter($linkName) {
 
     <hr class="my-3">
 
-    <ul class="nav flex-column mb-auto">
+    <ul class="nav flex-column mb-auto mb-2">
         <!-- <li class="nav-item">
             <a class="nav-link d-flex align-items-center gap-2 <?php echo highlighter('settings'); ?>" href="?page=settings">
             <svg class="bi"><use xlink:href="#gear-wide-connected"/></svg>

@@ -59,11 +59,116 @@ $(function () {
 
   // RESERVATION
   const booking = $("#customer-booking-btn");
-  const reservationModal = $("#reservation-modal");
-  booking.on("click", function() {
-    console.log('testing')
+  const reservationModal = $("#reservationModal");
+  reservationModal.on('shown.bs.modal', function() {
+    booking.attr('disabled', true);
 
-    reservationModal.modal('hide');
+    const agreed = $("#agree-to-terms");
+    agreed.on('change', function() {
+      if($(this).is(":checked")) {
+        booking.attr('disabled', false);
+      } else {
+        booking.attr('disabled', true);
+      }
+    })
+  });
+
+  booking.on("click", function() {
+    const celebrantName = $("#celebrant-name");
+    const customerName = $("#customer-name");
+    const mobile = $("#customer-mobile");
+    const age = $("#customer-age");
+    const gender = $("#customer-gender");
+    const nickname = $("#customer-nickname");
+    const customerReservationType = $("#customer-reservation-type");
+    const customerReservationDate = $("#customer-reservation-date");
+    const eventDateTime = $("#customer-event-date");
+    const evenStatus = $("#event-status");
+    const favors = $("#customer-favors");
+    const cake = $("#customer-cake");
+    const meal = $("#bundle-meal");
+    const theme = $("#customer-theme");
+    const paymentMode = $("#payment-mode");
+    const paymentTerms = $("#payment-terms");
+    const amount = $("#payment-amount");
+    const balance = $("#payment-balance");
+    const agreed = $("#agree-to-terms");
+    const email = $("#customer-email");
+
+    const submissionStatus = $(".submission-status");
+
+    function reset() {
+      celebrantName.val("");
+      customerName.val("");
+      email.val("");
+      mobile.val("");
+      age.val("");
+      gender.val("0");
+      nickname.val("");
+      customerReservationType.val("0");
+      customerReservationDate.val("");
+      favors.val("");
+      cake.val("");
+      meal.val("");
+      theme.val("");
+      paymentMode.val("0");
+      paymentTerms.val("0");
+      amount.val("");
+      agreed.prop("checked", false);
+    }
+
+    const payload = {
+      module: 'customers',
+      process: 'new',
+      id: "0",
+      celebrantName: celebrantName.val(),
+      customerName: customerName.val(),
+      eventStatus: 0,
+      eventDateTime: customerReservationDate.val(),
+      reservationType: customerReservationType.val(),
+      reservationDate: new Date().toLocaleDateString(),
+      mobile: mobile.val(),
+      age: age.val(),
+      gender: gender.val(),
+      nickname: nickname.val(),
+      favors: favors.val(),
+      cake: cake.val(),
+      meal: meal.val(),
+      theme: theme.val(),
+      paymentMode: paymentMode.val(),
+      paymentTerms: paymentTerms.val(),
+      amount: amount.val(),
+      balance: 0,
+      agreed: agreed.is(":checked")
+    }
+    // console.log(payload)
+
+    $.ajax({
+      method: 'POST',
+      url: './admin/process.php',
+      data: payload,
+      beforeSend: function() {
+          booking.text("Sending...").attr("disabled", true);
+      },
+      success: function(data) {
+        const { isProcessed, msg } = JSON.parse(data);
+        booking.text("Submit").attr("disabled", false);
+        if (isProcessed) {
+
+          submissionStatus.text(msg).css({'color':'green'});
+
+          setTimeout(() => {
+            submissionStatus.text("");
+            reset();
+            reservationModal.modal('hide');
+            booking.text("Submit");
+          }, 5000);
+
+        } else {
+          submissionStatus.text(msg).css({'color':'red'});
+        }
+      }
+    });
   });
 
   //NEWSLETTER SIGN-UP

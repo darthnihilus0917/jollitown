@@ -87,29 +87,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     break;
                 default:
+                    $id = $_POST['id'];
                     $celebrantName = htmlspecialchars(trim($_POST['celebrantName']));
                     $customerName = htmlspecialchars(trim($_POST['customerName']));
+                    $mobile = htmlspecialchars(trim($_POST['mobile']));
+                    $age = htmlspecialchars(trim($_POST['age']));
+                    $gender = htmlspecialchars(trim($_POST['gender']));
+                    $nickname = htmlspecialchars(trim($_POST['nickname']));
+                    $favors = htmlspecialchars(trim($_POST['favors']));
+                    $cake = htmlspecialchars(trim($_POST['cake']));
+                    $meal = htmlspecialchars(trim($_POST['meal']));
+                    $theme = htmlspecialchars(trim($_POST['theme']));
+                    $paymentMode = htmlspecialchars(trim($_POST['paymentMode']));
+                    $paymentTerms = htmlspecialchars(trim($_POST['paymentTerms']));
+                    $amount = htmlspecialchars(trim($_POST['amount']));
                     $eventDateTime = htmlspecialchars(trim($_POST['eventDateTime']));
                     $eventStatus = htmlspecialchars(trim($_POST['eventStatus']));
                     $reservationType = htmlspecialchars(trim($_POST['reservationType']));
                     $reservationDate = htmlspecialchars(trim($_POST['reservationDate']));
-        
-                    $sql = "UPDATE booking 
-                        SET cname='".$celebrantName."', name='".$customerName."', rdates='".$reservationDate."', reservation='".$reservationType."', event_datetime='".$eventDateTime."', is_done='".$eventStatus."'
-                        WHERE id='".$id."'";
-                    
+                    $agreement = htmlspecialchars(trim($_POST['agreed']));
+                    $agreement = ($agreement) ? "agree" : "";
+
+                    $sql = "INSERT INTO booking(name,cname,mobile,rdates,themes,gender,age,nickname,reservation,favors,cake,meal,payment,agreement,is_done,event_datetime,payment_mode,payment_amount)
+                        VALUES('".$customerName."','".$celebrantName."','".$mobile."',now(),'".$theme."','".$gender."','".$age."','".$nickname."','".$reservationType."','".$favors."','".$cake."','".$meal."','".$paymentTerms."','".$agreement."','".$eventStatus."','".$eventDateTime."','".$paymentMode."','".$amount."')";
+
                     try {
                         if($conn->query($sql)) {
                             $response = [
                                 "isProcessed" => true,
-                                "msg" => "New user successfully added!"
+                                "msg" => "Reservation booked! Our team will contact you the soonest."
                             ];
                             echo json_encode($response);
                             
                         } else {
                             $response = [
                                 "isProcessed" => false,
-                                "msg" => "Error saving data."
+                                "msg" => "Error in booking. Try again later."
                             ];
                             echo json_encode($response);
                         }
