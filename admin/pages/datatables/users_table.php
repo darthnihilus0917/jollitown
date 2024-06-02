@@ -2,7 +2,6 @@
 <table id="user-table" class="table table-striped table-responsive" style="width:100%">
     <thead>
         <tr>
-            <th>ID</th>
             <th>Username</th>
             <th>Email Address</th>
             <th>Role</th>
@@ -24,6 +23,7 @@
                 $id = $row["id"];
                 $user = $row["user_name"];
                 $email = $row["email"];
+                $role = $row["role"];
                 $dateCreated = $row["date"];
 
                 $default = "?page=users&process=";
@@ -31,10 +31,9 @@
                 $deleteLink = $default . "delete&id=" .$id;
                 ?>
                 <tr>
-                    <td class="text-center"><?php echo $id; ?></td>
                     <td class="text-center"><?php echo $user; ?></td>
                     <td><?php echo $email; ?></td>
-                    <td class="text-center">Admin</td>
+                    <td class="text-center"><?php echo $role; ?></td>
                     <td class="text-center"><?php echo $dateCreated; ?></td>
                     <td class="text-center">
                         <a href="<?php echo $editLink ?>" class="btn btn-warning" title="Edit">
@@ -54,7 +53,6 @@
         } else {
             ?>
             <tr>
-                <td></td>
                 <td></td>
                 <td></td>
                 <td></td>

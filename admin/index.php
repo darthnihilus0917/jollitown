@@ -7,9 +7,8 @@ function getPageParameter() {
 }
 ?>
 <!doctype html>
-<html lang="en" data-bs-theme="auto">
+<html lang="en">
   <head>
-    <script src="https://getbootstrap.com/docs/5.3/assets/js/color-modes.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -22,7 +21,6 @@ function getPageParameter() {
     <link rel="stylesheet" href="../assets/scripts/datatables.css" />
     <link rel="stylesheet" href="../assets/scripts/datatables.min.css" />
     <link rel="stylesheet" href="../assets/styles/admin.styles.css" />
-    <meta name="theme-color" content="#712cf9">
 
     <!-- Custom styles for this template -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.min.css" rel="stylesheet">
@@ -30,7 +28,7 @@ function getPageParameter() {
   <body>
     <?php include('includes/icons.php'); ?>
 
-<header class="navbar sticky-top bg-danger flex-md-nowrap p-0 shadow" data-bs-theme="dark">
+<header class="navbar sticky-top bg-danger flex-md-nowrap p-0 shadow" data-bs-theme="light">
   <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white" href="#"><?php echo $appName; ?></a>
 
   <ul class="navbar-nav flex-row d-md-none">
@@ -40,7 +38,7 @@ function getPageParameter() {
       </button>
     </li>
     <li class="nav-item text-nowrap">
-      <button class="nav-link px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="nav-link toggle-menu px-3 text-white" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <svg class="bi"><use xlink:href="#list"/></svg>
       </button>
     </li>

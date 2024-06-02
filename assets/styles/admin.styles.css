@@ -189,3 +189,7 @@ body {
   .form-wrapper label {
     font-weight: bold;
   }
+
+  .toggle-menu {
+    color: #fff !important;
+  }

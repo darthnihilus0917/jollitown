@@ -59,8 +59,11 @@ $(function () {
 
   // RESERVATION
   const booking = $("#customer-booking-btn");
+  const reservationModal = $("#reservation-modal");
   booking.on("click", function() {
     console.log('testing')
+
+    reservationModal.modal('hide');
   });
 
   //NEWSLETTER SIGN-UP

@@ -1,14 +1,35 @@
 <?php
+include('./../config/db.php');
+
+$process = $_GET['process'];
+$field = null;
+$id = 0;
+if ($process == "edit" || $process == "delete") {
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM booking WHERE id = '". $id ."'";
+    $field = $conn->query($sql)->fetch_assoc();
+} 
+
 $isAdmin = true;
 $fieldStatus = ($isAdmin) ? "" : "readonly";
+$fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
 ?>
 <div class="form-wrapper">
+    <div class="row">
+        <p class="fw-bold">
+            All fields are required.
+        </p>
+        <p>
+            <strong>REMINDER:</strong> Venue reservation is good for two (2) hours, which also includes the host.
+        </p>
+    </div>
     <div class="row mb-2">
         <div class="col-lg-2 label-placeholder">
             <label for="">Celebrant's Name:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="text" id="celebrant-name" <?php echo $fieldStatus ?>/>
+            <input type="hidden" id="process" value="<?php echo $_GET['process']?>" data-id="<?php echo $id ?>"/>
+            <input class="form-control" type="text" id="celebrant-name" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['cname'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -16,7 +37,7 @@ $fieldStatus = ($isAdmin) ? "" : "readonly";
             <label for="">Customer Name:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="text" id="customer-name" <?php echo $fieldStatus ?>/>
+            <input class="form-control" type="text" id="customer-name" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['name'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -24,13 +45,18 @@ $fieldStatus = ($isAdmin) ? "" : "readonly";
             <label for="">Reservation Type:</label>
         </div>
         <div class="col-lg-10">
-            <select name="reservation-type" id="customer-reservation-type" class="form-select"  <?php echo $fieldStatus ?>>
+            <select name="reservation-type" id="customer-reservation-type" class="form-select"  <?php echo $fieldDisabled ?>>
                 <option value="0">Select reservation type</option>
                 <?php
                     $type = ['In-Store Jollibee Kids Party', 'Out - Outside of store'];
                     for($i=0;$i<count($type);$i++) {
+                        $value = ($field != null) ? $field['reservation'] : "";
+                        $selected = "";
+                        if ($value != "") {
+                            $selected = ($value == $type[$i]) ? "selected" : "";
+                        }
                         ?>
-                        <option value="<?php echo $type[$i] ?>"><?php echo $type[$i] ?></option>
+                        <option value="<?php echo $type[$i] ?>" <?php echo $selected ?>><?php echo $type[$i] ?></option>
                         <?php
                     }
                 ?>
@@ -42,15 +68,15 @@ $fieldStatus = ($isAdmin) ? "" : "readonly";
             <label for="">Date of Reservation:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="date" name="customer-reservation-date" id="customer-reservation-date" placeholder="Reservation Date" <?php echo $fieldStatus ?>/>
+            <input class="form-control" type="date" name="customer-reservation-date" id="customer-reservation-date" placeholder="Reservation Date" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['rdates'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
         <div class="col-lg-2 label-placeholder">
-            <label for="">Event Date:</label>
+            <label for="">Event Date & Time:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="date" name="customer-event-date" id="customer-event-date" placeholder="Event Date" <?php echo $fieldStatus ?>/>
+            <input class="form-control" type="datetime-local" name="customer-event-date" id="customer-event-date" placeholder="Event Date" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['event_datetime'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -58,24 +84,31 @@ $fieldStatus = ($isAdmin) ? "" : "readonly";
             <label for="">Event Done?</label>
         </div>
         <div class="col-lg-10">
-            <select class="form-control" name="event-status" id="event-status" <?php echo $fieldStatus ?>>
-                <option value="0"> Select an event status</option>
-                <option value="Yes">Yes</option>
-                <option value="N">No</option>
+            <select class="form-select" name="event-status" id="event-status" <?php echo $fieldStatus ?>>
+                <?php
+                $value = ($field != null) ? $field['is_done'] : "";
+                $selected = "";
+                if ($value != "") {
+                    $value = ($value == "0") ? "No" : "Yes";
+                    var_dump($value);
+                    $yesSelected = ($value == "Yes") ? "selected" : "";
+                    $noSelected = ($value == "No") ? "selected" : "";
+                }
+                ?>
+                <option value=""> Select an event status</option>
+                <option value="1" <?php echo $yesSelected; ?>>Yes</option>
+                <option value="0" <?php echo $noSelected; ?>>No</option>
             </select>
         </div>
     </div>
 </div>
 <div class="button-section mt-2">
     <div class="row mb-2">
-        <div class="col-lg-2">
-            <button class="btn btn-success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
-                <path d="M11 2H9v3h2z"/>
-                <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
-                </svg>
-                <span class="ps-2">Save</span>
+        <div class="col-lg-6">
+            <button class="btn btn-success" id="reservation-save">
+                <span class="px-4">Save</span>
             </button>
+            <span id="process-result" class="ps-2 fw-bold"></span>
         </div>
     </div>
 </div>

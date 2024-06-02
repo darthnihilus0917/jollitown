@@ -1,14 +1,32 @@
 <?php
+include('./../config/db.php'); 
+
+$process = $_GET['process'];
+$field = null;
+$id = 0;
+if ($process == "edit" || $process == "delete") {
+    $id = $_GET['id'];
+    $sql = "SELECT * FROM users WHERE id = '". $id ."'";
+    $field = $conn->query($sql)->fetch_assoc();
+} 
+
 $isAdmin = true;
-$fieldStatus = ($isAdmin) ? "" : "readonly";
+$fieldStatus = (!$isAdmin || $process == "delete") ? "readonly" : "";
+$fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
 ?>
 <div class="form-wrapper">
+    <div class="row">
+        <p class="fw-bold">
+            All fields are required.
+        </p>
+    </div>
     <div class="row mb-2">
         <div class="col-lg-2 label-placeholder">
             <label for="">Name:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="text" id="name" <?php echo $fieldStatus ?>/>
+            <input type="hidden" id="process" value="<?php echo $_GET['process']?>" data-id="<?php echo $id ?>"/>
+            <input class="form-control" type="text" id="name" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['name'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -16,7 +34,7 @@ $fieldStatus = ($isAdmin) ? "" : "readonly";
             <label for="">Username:</label>
         </div>
         <div class="col-lg-10">
-            <input type="text" class="form-control" id="username" <?php echo $fieldStatus ?>/>
+            <input type="text" class="form-control" id="username" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['user_name'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -24,7 +42,7 @@ $fieldStatus = ($isAdmin) ? "" : "readonly";
             <label for="">Password:</label>
         </div>
         <div class="col-lg-10">
-            <input type="password" class="form-control" id="password" <?php echo $fieldStatus ?>/>
+            <input type="password" class="form-control" id="password" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['password'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -32,9 +50,12 @@ $fieldStatus = ($isAdmin) ? "" : "readonly";
             <label for="">Role:</label>
         </div>
         <div class="col-lg-10">
-            <select name="" id="role" class="form-select" <?php echo $fieldStatus ?>>
-                <option value="User">User</option>
-                <option value="Admin">Admin</option>
+            <?php
+                $userSelected = ($field != null) ? $field['role'] : "";            
+            ?>
+            <select name="" id="role" class="form-select" <?php echo $fieldDisabled ?>>
+                <option value="User" <?php echo ($userSelected == "User") ? "selected" : "" ?>>User</option>
+                <option value="Admin"<?php echo ($userSelected == "Admin") ? "selected" : "" ?>>Admin</option>
             </select>
         </div>
     </div>
@@ -43,20 +64,32 @@ $fieldStatus = ($isAdmin) ? "" : "readonly";
             <label for="">Email Address:</label>
         </div>
         <div class="col-lg-10">
-            <input type="email" class="form-control" id="email" <?php echo $fieldStatus ?>/>
+            <input type="email" class="form-control" id="email" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['email'] : "" ?>"/>
         </div>
     </div>
 </div>
 <div class="button-section mt-2">
     <div class="row mb-2">
-        <div class="col-lg-2">
-            <button class="btn btn-success">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-floppy" viewBox="0 0 16 16">
-                <path d="M11 2H9v3h2z"/>
-                <path d="M1.5 0h11.586a1.5 1.5 0 0 1 1.06.44l1.415 1.414A1.5 1.5 0 0 1 16 2.914V14.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 14.5v-13A1.5 1.5 0 0 1 1.5 0M1 1.5v13a.5.5 0 0 0 .5.5H2v-4.5A1.5 1.5 0 0 1 3.5 9h9a1.5 1.5 0 0 1 1.5 1.5V15h.5a.5.5 0 0 0 .5-.5V2.914a.5.5 0 0 0-.146-.353l-1.415-1.415A.5.5 0 0 0 13.086 1H13v4.5A1.5 1.5 0 0 1 11.5 7h-7A1.5 1.5 0 0 1 3 5.5V1H1.5a.5.5 0 0 0-.5.5m3 4a.5.5 0 0 0 .5.5h7a.5.5 0 0 0 .5-.5V1H4zM3 15h10v-4.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5z"/>
-                </svg>
-                <span class="ps-2">Save</span>
-            </button>
-        </div>
+        <?php 
+        if ($process == "delete") {
+        ?>
+            <div class="col-lg-8">
+                <button class="btn btn-danger" id="user-save">
+                    <span class="px-4">Delete this record? Click to proceed</span>
+                </button>
+                <span id="process-result" class="ps-2 fw-bold"></span>
+            </div>             
+        <?php
+        } else {
+            ?>
+            <div class="col-lg-6">
+                <button class="btn btn-success" id="user-save">
+                    <span class="px-4">Save</span>
+                </button>
+                <span id="process-result" class="ps-2 fw-bold"></span>
+            </div>            
+            <?php
+        }
+        ?>
     </div>
 </div>

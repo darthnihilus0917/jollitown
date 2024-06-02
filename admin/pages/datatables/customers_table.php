@@ -86,6 +86,10 @@ include('./../config/db.php');
                 <td></td>
                 <td></td>
                 <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <?php
         }
