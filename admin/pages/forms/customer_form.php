@@ -25,10 +25,11 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
     </div>
     <div class="row mb-2">
         <div class="col-lg-2 label-placeholder">
-            <label for="">Celebrant's Full Name:</label>
+        <label for="">Celebrant's Name:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="text" id="celebrant-name" <?php echo $fieldStatus ?>/>
+            <input type="hidden" id="process" value="<?php echo $_GET['process']?>" data-id="<?php echo $id ?>"/>
+            <input class="form-control" type="text" id="celebrant-name" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['cname'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -36,7 +37,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Customer Name:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="text" id="customer-name" <?php echo $fieldStatus ?>/>
+            <input class="form-control" type="text" id="customer-name" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['name'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -44,23 +45,23 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Mobile Number:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="number" id="customer-mobile-no" <?php echo $fieldStatus ?>/>
+            <input class="form-control" type="number" id="customer-mobile-no" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['mobile'] : "" ?>"/>
         </div>
     </div>
-    <div class="row mb-2">
+    <!-- <div class="row mb-2">
         <div class="col-lg-2 label-placeholder">
             <label for="">Email Address:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="email" id="customer-email" <?php echo $fieldStatus ?>/>
+            <input class="form-control" type="email" id="customer-email" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['mobile'] : "" ?>"/>
         </div>
-    </div>
+    </div> -->
     <div class="row mb-2">
         <div class="col-lg-2 label-placeholder">
             <label for="">Age:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="number" id="customer-age" <?php echo $fieldStatus ?>/>
+            <input class="form-control" type="number" id="customer-age" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['age'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -70,9 +71,18 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
         <div class="col-lg-10">
             <select name="" id="customer-gender" class="form-select"  <?php echo $fieldStatus ?>>
                 <option value="0">Select a gender</option>
-                <option value="M">Male</option>
-                <option value="F">Female</option>
-                <option value="NB">Non-Binary</option>
+                <?php
+                $value = ($field != null) ? $field['gender'] : "";
+                $selected = "";
+                if ($value != "") {
+                    $maleSelected = ($value == "M") ? "selected" : "";
+                    $femaleSelected = ($value == "F") ? "selected" : "";
+                    $nbSelected = ($value == "NB") ? "selected" : "";
+                }
+                ?>
+                <option value="M" <?php echo $maleSelected; ?>>Male</option>
+                <option value="F" <?php echo $femaleSelected; ?>>Female</option>
+                <option value="NB" <?php echo $nbSelected; ?>>Non-Binary</option>
             </select>
         </div>
     </div>
@@ -81,7 +91,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Nickname:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="text" id="customer-nickname" <?php echo $fieldStatus ?>/>
+            <input class="form-control" type="text" id="customer-nickname" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['nickname'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -89,13 +99,18 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Reservation Type:</label>
         </div>
         <div class="col-lg-10">
-            <select name="reservation-type" id="customer-reservation-type" class="form-select"  <?php echo $fieldStatus ?>>
+        <select name="reservation-type" id="customer-reservation-type" class="form-select"  <?php echo $fieldDisabled ?>>
                 <option value="0">Select reservation type</option>
                 <?php
                     $type = ['In-Store Jollibee Kids Party', 'Out - Outside of store'];
                     for($i=0;$i<count($type);$i++) {
+                        $value = ($field != null) ? $field['reservation'] : "";
+                        $selected = "";
+                        if ($value != "") {
+                            $selected = ($value == $type[$i]) ? "selected" : "";
+                        }
                         ?>
-                        <option value="<?php echo $type[$i] ?>"><?php echo $type[$i] ?></option>
+                        <option value="<?php echo $type[$i] ?>" <?php echo $selected ?>><?php echo $type[$i] ?></option>
                         <?php
                     }
                 ?>
@@ -104,10 +119,18 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
     </div>
     <div class="row mb-2">
         <div class="col-lg-2 label-placeholder">
-            <label for="">Reservation Date:</label>
+            <label for="">Date of Reservation:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="date" name="customer-reservation-date" id="customer-reservation-date" placeholder="Reservation Date" <?php echo $fieldStatus ?>/>
+            <input class="form-control" type="date" name="customer-reservation-date" id="customer-reservation-date" placeholder="Reservation Date" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['rdates'] : "" ?>"/>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-lg-2 label-placeholder">
+            <label for="">Event Date & Time:</label>
+        </div>
+        <div class="col-lg-10">
+            <input class="form-control" type="datetime-local" name="customer-event-date" id="customer-event-date" placeholder="Event Date" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['event_datetime'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -120,8 +143,13 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <?php
                 $favors = ['2000', '1500'];
                 for($i=0;$i<count($favors);$i++) {
+                    $value = ($field != null) ? $field['favors'] : "";
+                    $selected = "";
+                    if ($value != "") {
+                        $selected = ($value == $favors[$i]) ? "selected" : "";
+                    }
                     ?>
-                    <option value="Party Favors <?php echo $i+1 . " = " . $favors[$i] ?>">Party Favors <?php echo $i+1 . " = " . $favors[$i] ?></option>
+                    <option value="Party Favors <?php echo $i+1 . " = " . $favors[$i] ?>" <?php echo $selected; ?>>Party Favors <?php echo $i+1 . " = " . $favors[$i] ?></option>
                     <?php
                 }
             ?>
@@ -138,8 +166,13 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <?php
                 $cake = ['Mocha Cake', 'Chocolate Cake'];
                 for($i=0;$i<count($cake);$i++) {
+                    $value = ($field != null) ? $field['cake'] : "";
+                    $selected = "";
+                    if ($value != "") {
+                        $selected = ($value == $cake[$i]) ? "selected" : "";
+                    }
                     ?>
-                    <option value="<?php echo $cake[$i] ?> (Hello Kitty = 2000)"><?php echo $cake[$i] ?> (Hello Kitty = 2000)</option>
+                    <option value="<?php echo $cake[$i] ?> (Hello Kitty = 2000)" <?php echo $selected; ?>><?php echo $cake[$i] ?> (Hello Kitty = 2000)</option>
                     <?php
                 }
             ?>
@@ -156,8 +189,13 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <?php
                 $meal = ['A', 'B', 'C', 'D', 'E'];
                 for($i=0;$i<count($meal);$i++) {
+                    $value = ($field != null) ? $field['meal'] : "";
+                    $selected = "";
+                    if ($value != "") {
+                        $selected = ($value == $meal[$i]) ? "selected" : "";
+                    }
                     ?>
-                    <option value="Meal - <?php echo $meal[$i] ?>">Meal - <?php echo $meal[$i] ?></option>
+                    <option value="Meal - <?php echo $meal[$i] ?>" <?php echo $selected; ?>>Meal - <?php echo $meal[$i] ?></option>
                     <?php
                 }
             ?>
@@ -170,9 +208,17 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
         </div>
         <div class="col-lg-10">
             <select class="form-control" name="payment-terms" id="payment-mode" <?php echo $fieldStatus ?>>
+                <?php
+                    $value = ($field != null) ? $field['payment_mode'] : "";
+                    $selected = "";
+                    if ($value != "") {
+                        $cashSelected = ($value == "Cash") ? "selected" : "";
+                        $gcashSelected = ($value == "GCash") ? "selected" : "";
+                    }
+                ?>
                 <option value="0"> Select a payment mode</option>
-                <option value="Cash">Cash</option>
-                <option value="GCash">GCash (09486502742)</option>
+                <option value="Cash" <?php echo $cashSelected; ?>>Cash</option>
+                <option value="GCash" <?php echo $gcashSelected; ?>>GCash (09486502742)</option>
             </select>
         </div>
     </div>
@@ -182,9 +228,17 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
         </div>
         <div class="col-lg-10">
             <select class="form-control" name="payment-terms" id="payment-terms" <?php echo $fieldStatus ?>>
+                <?php
+                    $value = ($field != null) ? $field['payment'] : "";
+                    $selected = "";
+                    if ($value != "") {
+                        $partialSelected = ($value == "Partial") ? "selected" : "";
+                        $fullSelected = ($value == "Full") ? "selected" : "";
+                    }
+                ?>
                 <option value="0"> Select a payment terms</option>
-                <option value="Partial Payment">Partial Payment (Downpayment)</option>
-                <option value="Full Payment">Full Payment</option>
+                <option value="Partial" <?php echo $partialSelected; ?>>Partial Payment (Downpayment)</option>
+                <option value="Full" <?php echo $fullSelected; ?>>Full Payment</option>
             </select>
         </div>
     </div>
@@ -193,7 +247,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Payment Amount:</label>
         </div>
         <div class="col-lg-10">
-            <input class="form-control" type="number" name="payment-amount" id="payment-amount" <?php echo $fieldStatus ?>/>
+            <input class="form-control" type="number" name="payment-amount" id="payment-amount" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['payment_amount'] : "" ?>"/>
         </div>
     </div>
     <div class="row mb-2">
@@ -201,10 +255,19 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <label for="">Event Done?</label>
         </div>
         <div class="col-lg-10">
-            <select class="form-control" name="event-status" id="event-status" <?php echo $fieldStatus ?>>
-                <option value="0"> Select an event status</option>
-                <option value="Yes">Yes</option>
-                <option value="N">No</option>
+            <select class="form-select" name="event-status" id="event-status" <?php echo $fieldStatus ?>>
+                <?php
+                $value = ($field != null) ? $field['is_done'] : "";
+                $selected = "";
+                if ($value != "") {
+                    $value = ($value == "0") ? "No" : "Yes";
+                    $yesSelected = ($value == "Yes") ? "selected" : "";
+                    $noSelected = ($value == "No") ? "selected" : "";
+                }
+                ?>
+                <option value=""> Select an event status</option>
+                <option value="1" <?php echo $yesSelected; ?>>Yes</option>
+                <option value="0" <?php echo $noSelected; ?>>No</option>
             </select>
         </div>
     </div>
