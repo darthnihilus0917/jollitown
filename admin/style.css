@@ -1,15 +1,12 @@
 *{
-
-
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
 	color: #444;
-	font-family: calibri;
 }
 
-body{	
-
+body {	
+	font-family: 'Federo', sans-serif !important;
 	background-color:#fdfbec ;
 	display: flex;
 	justify-content: center;

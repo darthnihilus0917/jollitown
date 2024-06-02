@@ -88,9 +88,10 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
                 <?php
                 $value = ($field != null) ? $field['is_done'] : "";
                 $selected = "";
+                $yesSelected = "";
+                $noSelected = "";
                 if ($value != "") {
                     $value = ($value == "0") ? "No" : "Yes";
-                    var_dump($value);
                     $yesSelected = ($value == "Yes") ? "selected" : "";
                     $noSelected = ($value == "No") ? "selected" : "";
                 }

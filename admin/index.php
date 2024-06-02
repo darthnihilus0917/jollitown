@@ -1,10 +1,18 @@
 
 <?php
-$appName = "Jollitown Reservation System";
+session_start();
+
+if (!isset($_SESSION['is_logged_in']) || $_SESSION['is_logged_in'] !== true) {
+  header("Location: login.php");
+  exit();
+}
+
+$appName = "Reservation System";
 
 function getPageParameter() {
     return (isset($_GET['page'])) ? $_GET['page'] : null;
 }
+
 ?>
 <!doctype html>
 <html lang="en">

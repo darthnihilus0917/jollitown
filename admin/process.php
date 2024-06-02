@@ -3,7 +3,7 @@ include('./../config/db.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     switch($_POST['module']) {
-        case "customer":
+        case "customers":
             $process = $_POST['process'];
             switch($process) {
                 case "delete":
@@ -61,7 +61,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         mobile='".$mobile."', age='".$age."', gender='".$gender."', nickname='".$nickname."'
                         WHERE id='".$id."'";
                     
-                    echo $sql;
+                    try {
+                        if($conn->query($sql)) {
+                            $response = [
+                                "isProcessed" => true,
+                                "msg" => "Customer successfully updated!"
+                            ];
+                            echo json_encode($response);
+                            
+                        } else {
+                            $response = [
+                                "isProcessed" => false,
+                                "msg" => "Error saving data."
+                            ];
+                            echo json_encode($response);
+                        }
+
+                    } catch(Exception $e) {
+                        $response = [
+                            "isProcessed" => false,
+                            "msg" => $e
+                        ];
+                        echo json_encode($response);
+                    }
 
                     break;
                 default:
@@ -75,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $sql = "UPDATE booking 
                         SET cname='".$celebrantName."', name='".$customerName."', rdates='".$reservationDate."', reservation='".$reservationType."', event_datetime='".$eventDateTime."', is_done='".$eventStatus."'
                         WHERE id='".$id."'";
-                        
+                    
                     try {
                         if($conn->query($sql)) {
                             $response = [
@@ -189,7 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if($conn->query($sql)) {
                             $response = [
                                 "isProcessed" => true,
-                                "msg" => "User successfully updated!"
+                                "msg" => "Reservation successfully updated!"
                             ];
                             echo json_encode($response);
                             

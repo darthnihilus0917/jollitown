@@ -27,6 +27,7 @@ $(function() {
         const result = fields.map((field) => {
             return (field.val().length <= 1) ? true : false;
         });
+        console.log(result)
         return result.includes(true);
     }
 
@@ -53,9 +54,9 @@ $(function() {
         const amount = $("#payment-amount");
         const balance = $("#payment-balance");
 
-        const fields = [celebrantName, customerName, mobile, age, gender, nickname, 
-            customerReservationType, customerReservationDate, eventDateTime, evenStatus,
-            favors, cake, meal, theme, paymentMode, paymentTerms, amount, balance];
+        const fields = [celebrantName, customerName, mobile, age, nickname, 
+            customerReservationType, customerReservationDate,
+            favors, cake, meal, theme, paymentMode, paymentTerms];
         fields.forEach((field) => {
             field.on("keyup", function() { processResult.text("");});
             field.on("change", function() { processResult.text(""); });
@@ -110,7 +111,9 @@ $(function() {
                         resultCss =  {"color":"red"};
                     }
                     processResult.text(msg).css(resultCss);
-                    if (payload.process === 'edit') location.reload();
+                    if (payload.process === 'edit') {
+                        setTimeout(() => { location.reload(); }, 3000);
+                    }
                     if (payload.process === 'delete') window.location.href = `?page=users`;
                 }
             });
@@ -128,7 +131,7 @@ $(function() {
         const eventDateTime = $("#customer-event-date");
         const evenStatus = $("#event-status");
 
-        const fields = [celebrantName, customerName, customerReservationType, customerReservationDate, eventDateTime, evenStatus];
+        const fields = [celebrantName, customerName, customerReservationType];
         fields.forEach((field) => {
             field.on("keyup", function() { processResult.text("");});
             field.on("change", function() { processResult.text(""); });
