@@ -1,3 +1,12 @@
+document.addEventListener('DOMContentLoaded', function() {
+  let calendarEl = document.getElementById('reservation-calendar');
+  let calendar = new FullCalendar.Calendar(calendarEl, {
+      initialView: 'dayGridMonth',
+      events: 'admin/calendar_data.php'
+  });
+  calendar.render();
+});
+
 $(function () {
   console.log(`Welcome to Jollitown!!!`);
 
@@ -53,7 +62,7 @@ $(function () {
     fit: true,
   });
 
-  $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker();
+  // $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker();
 
   $().UItoTop({ easingType: "easeOutQuart" });
 
@@ -232,9 +241,10 @@ $(function () {
   });
 
   // RESERVATION CALENDAR
-  const calendarEl = $("#reservation-calendar");
-  const calendar = new FullCalendar.Calendar(calendarEl, {
-      initialView: 'dayGridMonth'
-  });
-  calendar.render();
+  // const calendarEl = $("#reservation-calendar");
+  // const calendar = new FullCalendar.Calendar(calendarEl, {
+  //     initialView: 'dayGridMonth',
+  //     events: 'admin/calendar_data.php'
+  // });
+  // calendar.render();
 });

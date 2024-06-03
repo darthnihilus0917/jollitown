@@ -98,7 +98,10 @@ function getPageParameter() {
     <script src="https://getbootstrap.com/docs/5.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/scripts/datatables.js"></script>
     <script src="../assets/scripts/datatables.min.js"></script>
+
+    <script src="../assets/scripts/fullcalendar-6.1.13/dist/index.global.js"></script> 
     <script src="../assets/scripts/fullcalendar-6.1.13/dist/index.global.min.js"></script>    
+
     <script src="../assets/scripts/admin.jollitown.js"></script>
 </body>
 </html>

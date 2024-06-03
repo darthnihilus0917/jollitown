@@ -43,7 +43,7 @@ $newLink = $defaultLink . "&process=new";
                     include('forms/customer_form.php');
                     break;
                 case "delete":
-                    include('datatables/customers_table.php');
+                    include('forms/customer_form.php');
                     break;                    
                 default:
                     include('datatables/customers_table.php');

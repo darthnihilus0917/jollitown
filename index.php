@@ -75,9 +75,9 @@
 	<?php include('includes/footer.php'); ?>
 	
 	<!-- js -->
-	<script type="text/javascript" src="assets/scripts/jquery-2.1.4.min.js"></script>
-	<script type="text/javascript" src="assets/scripts/fullcalendar-6.1.13/dist/index.global.min.js"></script>    
-	<script type="text/javascript" src="assets/scripts/jquery-ui.js"></script>
+	<script type="text/javascript" src="assets/scripts/jquery-2.1.4.min.js"></script>  
+	<!-- <script type="text/javascript" src="assets/scripts/jquery-ui.js"></script> -->
+	<script type="text/javascript" src="assets/scripts/fullcalendar-6.1.13/dist/index.global.min.js"></script>
 	<script type="text/javascript" src="assets/scripts/bootstrap-3.1.1.min.js"></script>
 	<script type="text/javascript" src="assets/scripts/jquery.swipebox.min.js"></script>
 	<script type="text/javascript" src="assets/scripts/jquery.flexslider.js" defer ></script>

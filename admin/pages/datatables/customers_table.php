@@ -8,11 +8,12 @@ include('./../config/db.php');
             <th>Customer Name</th>
             <th>Celebrant Name</th>
             <th>Booked Date</th>
+            <th>Event Date</th>            
             <th>Theme</th>
             <th>Favors</th>
             <th>Cake</th>
             <th>Meal</th>
-            <th>Date Created</th>
+            <!-- <th>Date Created</th> -->
             <th>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gear" viewBox="0 0 16 16">
                     <path d="M8 4.754a3.246 3.246 0 1 0 0 6.492 3.246 3.246 0 0 0 0-6.492M5.754 8a2.246 2.246 0 1 1 4.492 0 2.246 2.246 0 0 1-4.492 0"/>
@@ -30,6 +31,7 @@ include('./../config/db.php');
                 $id = $row["id"];
                 $clientName = $row["name"];
                 $celebrantName = $row["cname"];
+                $eventDate = $row["event_datetime"];
                 $reservationDate = $row["rdates"];
                 $theme = $row["themes"];
                 $favors = $row["favors"];
@@ -52,6 +54,7 @@ include('./../config/db.php');
                         </svg>
                         <span class="ps-1"><?php echo $reservationDate; ?></span>
                     </td>
+                    <td><?php echo $eventDate; ?></td>
                     <td><?php echo $theme; ?></td>
                     <td><?php echo $favors; ?></td>
                     <td>
@@ -61,7 +64,7 @@ include('./../config/db.php');
                         <span class="ps-1"><?php echo $cake; ?></span>
                     </td>
                     <td><?php echo $meal; ?></td>
-                    <td class="text-center"><?php echo $dateCreated; ?></td>
+                    <!-- <td class="text-center"><?php echo $dateCreated; ?></td> -->
                     <td class="text-center crud-buttons">
                         <a href="<?php echo $editLink ?>" class="btn btn-warning" title="Edit">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">

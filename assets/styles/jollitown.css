@@ -37,3 +37,37 @@
     border-bottom: solid 1px #ccc;
     border-style: dashed;
 }
+
+.calendar-wrapper {
+    padding: 20px !important;
+    background-color: #6d0b1d !important;
+}
+
+#reservation-calendar h2.fc-toolbar-title {
+    color: gold !important;
+}
+#reservation-calendar .fc-today-button {
+    background-color: gold !important;
+    border: solid 1px gold !important;
+    color: #222;
+    text-transform: capitalize;
+}
+#reservation-calendar table thead,
+#reservation-calendar table thead a {
+    background-color: gold !important;
+    color: #222;
+}
+#reservation-calendar .fc-daygrid-day-number {
+    color: gold !important;
+}
+#reservation-calendar a.fc-event {
+    color: gold !important;
+}
+#reservation-calendar .fc-daygrid-event-dot {
+    border: solid 4px gold !important;
+}
+#reservation-calendar .fc-event-main {
+    background-color: gold !important;
+    border: solid 1px gold !important;
+    color: #222;
+}

@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     let calendarEl = document.getElementById('reservation-calendar');
     let calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth'
+        initialView: 'dayGridMonth',
+        events: 'calendar_data.php'
     });
     calendar.render();
 });
@@ -254,9 +255,17 @@ $(function() {
         }
     });
 
-    const calendarEl = $("#reservation-calendar");
-    const calendar = new FullCalendar.Calendar(calendarEl, {
-        initialView: 'dayGridMonth'
-    });
-    calendar.render();
+    // const calendarEl = $("#reservation-calendar");
+    // const calendar = new FullCalendar.Calendar(calendarEl, {
+    //     initialView: 'dayGridMonth',
+    //     timeZone: 'UTC',
+    //     events: [
+    //       {
+    //         id: 'a',
+    //         title: 'my event',
+    //         start: '2024-06-03'
+    //       }
+    //     ]
+    // });
+    // calendar.render();
 });
