@@ -161,6 +161,7 @@
                 </div>
                 <div class="col-lg-6">
                     <label for="">Preview</label>
+                    <div class="preview-wrapper"></div>
                 </div>
             </div>
         </div>

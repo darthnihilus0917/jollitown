@@ -82,6 +82,11 @@ $(function () {
     })
   });
 
+  const favors = $("#customer-favors");
+  const cake = $("#customer-cake");
+  const meal = $("#bundle-meal");
+  const theme = $("#customer-theme");
+  const otherPackage = $("#others");
   booking.on("click", function() {
     const celebrantName = $("#celebrant-name");
     const customerName = $("#customer-name");
@@ -93,10 +98,6 @@ $(function () {
     const customerReservationDate = $("#customer-reservation-date");
     const eventDateTime = $("#customer-event-date");
     const evenStatus = $("#event-status");
-    const favors = $("#customer-favors");
-    const cake = $("#customer-cake");
-    const meal = $("#bundle-meal");
-    const theme = $("#customer-theme");
     const paymentMode = $("#payment-mode");
     const paymentTerms = $("#payment-terms");
     const amount = $("#payment-amount");
@@ -123,6 +124,7 @@ $(function () {
       paymentMode.val("0");
       paymentTerms.val("0");
       amount.val("");
+      otherPackage.val("0");
       agreed.prop("checked", false);
     }
 
@@ -144,6 +146,7 @@ $(function () {
       cake: cake.val(),
       meal: meal.val(),
       theme: theme.val(),
+      others: otherPackage.val(),
       paymentMode: paymentMode.val(),
       paymentTerms: paymentTerms.val(),
       amount: amount.val(),
@@ -239,12 +242,4 @@ $(function () {
       });
     }
   });
-
-  // RESERVATION CALENDAR
-  // const calendarEl = $("#reservation-calendar");
-  // const calendar = new FullCalendar.Calendar(calendarEl, {
-  //     initialView: 'dayGridMonth',
-  //     events: 'admin/calendar_data.php'
-  // });
-  // calendar.render();
 });

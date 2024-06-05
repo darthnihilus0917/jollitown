@@ -98,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $cake = htmlspecialchars(trim($_POST['cake']));
                     $meal = htmlspecialchars(trim($_POST['meal']));
                     $theme = htmlspecialchars(trim($_POST['theme']));
+                    $others = htmlspecialchars(trim($_POST['others']));
                     $paymentMode = htmlspecialchars(trim($_POST['paymentMode']));
                     $paymentTerms = htmlspecialchars(trim($_POST['paymentTerms']));
                     $amount = htmlspecialchars(trim($_POST['amount']));
@@ -108,8 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $agreement = htmlspecialchars(trim($_POST['agreed']));
                     $agreement = ($agreement) ? "agree" : "";
 
-                    $sql = "INSERT INTO booking(name,cname,mobile,rdates,themes,gender,age,nickname,reservation,favors,cake,meal,payment,agreement,is_done,event_datetime,payment_mode,payment_amount)
-                        VALUES('".$customerName."','".$celebrantName."','".$mobile."',now(),'".$theme."','".$gender."','".$age."','".$nickname."','".$reservationType."','".$favors."','".$cake."','".$meal."','".$paymentTerms."','".$agreement."','".$eventStatus."','".$eventDateTime."','".$paymentMode."','".$amount."')";
+                    $sql = "INSERT INTO booking(name,cname,mobile,rdates,themes,gender,age,nickname,reservation,favors,cake,meal,payment,agreement,is_done,event_datetime,payment_mode,payment_amount, others)
+                        VALUES('".$customerName."','".$celebrantName."','".$mobile."',now(),'".$theme."','".$gender."','".$age."','".$nickname."','".$reservationType."','".$favors."','".$cake."','".$meal."','".$paymentTerms."','".$agreement."','".$eventStatus."','".$eventDateTime."','".$paymentMode."','".$amount."', '".$others."')";
 
                     try {
                         if($conn->query($sql)) {
