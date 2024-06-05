@@ -82,10 +82,16 @@ $(function () {
     })
   });
 
+  const preview = $(".preview-wrapper");
+
   const favors = $("#customer-favors");
   const cake = $("#customer-cake");
   const meal = $("#bundle-meal");
   const theme = $("#customer-theme");
+  theme.on("change", function() {
+    console.log($(this).val())
+  })
+
   const otherPackage = $("#others");
   booking.on("click", function() {
     const celebrantName = $("#celebrant-name");

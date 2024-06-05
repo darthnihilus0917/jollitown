@@ -71,3 +71,8 @@
     border: solid 1px gold !important;
     color: #222;
 }
+
+#reservation-modal .preview-wrapper {
+    background-color: #ccc;
+    min-height: 20px;
+}

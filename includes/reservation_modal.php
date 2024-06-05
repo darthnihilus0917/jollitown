@@ -84,7 +84,7 @@
                         <select class="form-control" name="party-theme" id="customer-theme">
                             <option>Select a theme</option>
                         <?php
-                            $theme = ['Party Hats', 'Invitational Card', 'Trayliner', 'Message Board'];
+                            $theme = ['Factory', 'Hello Kitty', 'Jollitown', 'Race'];
                             for($i=0;$i<count($theme);$i++) {
                                 ?>
                                 <option value="<?php echo $theme[$i] ?>"><?php echo $theme[$i] ?></option>
