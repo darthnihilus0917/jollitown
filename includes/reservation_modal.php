@@ -57,7 +57,7 @@
                 <li>Party schedule has 3 schedules per day: 10AM-12PM | 1-3PM | 4-6PM.</li>
             </ul>
             <div class="row" style="padding-top: 4px;">
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <label for="">Reservation Type</label><br/>
                     <select name="reservation-type" id="customer-reservation-type" class="form-control">
                         <option value="0">Select reservation type</option>
@@ -71,67 +71,96 @@
                         ?>
                     </select>
                 </div>
-                <div class="col-lg-4">
+                <div class="col-lg-6">
                     <label for="">Event Date & Time</label><br/>
                     <input class="form-control" type="datetime-local" name="customer-reservation-date" id="customer-reservation-date" placeholder="Reservation Date"/>
                 </div>
-                <div class="col-lg-4">
-                    <label for="">Pick A Theme</label><br/>
-                    <select class="form-control" name="party-theme" id="customer-theme">
-                        <option>Select a theme</option>
-                    <?php
-                        $theme = ['Party Hats', 'Invitational Card', 'Trayliner', 'Message Board'];
-                        for($i=0;$i<count($theme);$i++) {
-                            ?>
-                            <option value="<?php echo $theme[$i] ?>"><?php echo $theme[$i] ?></option>
-                            <?php
-                        }
-                    ?>
-                    </select>
-                </div>
             </div>
+
             <div class="row" style="padding-top: 4px;">
-                <div class="col-lg-4">
-                    <label for="">Party Favors</label><br/>
-                    <select class="form-control" name="party-favors" id="customer-favors">
-                        <option>Select party favors</option>
-                    <?php
-                        $favors = ['2000', '1500'];
-                        for($i=0;$i<count($favors);$i++) {
-                            ?>
-                            <option value="<?php echo $favors[$i] ?>">Party Favors <?php echo $i+1 . " = " . $favors[$i] ?></option>
-                            <?php
-                        }
-                    ?>
-                    </select>
+                <div class="col-lg-6">
+                    <div>
+                        <label for="">Pick A Theme</label><br/>
+                        <select class="form-control" name="party-theme" id="customer-theme">
+                            <option>Select a theme</option>
+                        <?php
+                            $theme = ['Party Hats', 'Invitational Card', 'Trayliner', 'Message Board'];
+                            for($i=0;$i<count($theme);$i++) {
+                                ?>
+                                <option value="<?php echo $theme[$i] ?>"><?php echo $theme[$i] ?></option>
+                                <?php
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="">Party Favors</label><br/>
+                        <select class="form-control" name="party-favors" id="customer-favors">
+                            <option>Select party favors</option>
+                        <?php
+                            $favors = ['2000 Php', '1500 Php'];
+                            for($i=0;$i<count($favors);$i++) {
+                                $label = "Party Favors" . $i+1 . " - " . $favors[$i];
+                                ?>
+                                <option value="<?php echo $favors[$i] ?>">Party Favors <?php echo $label ?></option>
+                                <?php
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="">Theme Cake</label><br/>
+                        <select class="form-control" name="theme-cake" id="customer-cake">
+                            <option value="0">Select a cake</option>
+                        <?php
+                            $cake = ['Mocha Cake', 'Chocolate Cake'];
+                            for($i=0;$i<count($cake);$i++) {
+                                $label = $cake[$i] . " (Hello Kitty) - 2000 Php";
+                                ?>
+                                <option value="<?php echo $cake[$i] ?>"><?php echo $label ?> </option>
+                                <?php
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="">Bundle Meal</label><br/>
+                        <select class="form-control" name="bundle-meal" id="bundle-meal">
+                            <option value="0">Select a meal</option>
+                        <?php
+                            $meal = ['A - 214 Php', 'B - 286 Php', 'C - 339 Php', 'D - 296 Php'];
+                            for($i=0;$i<count($meal);$i++) {
+                                $label = "Meal " . $meal[$i];
+                                ?>
+                                <option value="<?php echo $meal[$i] ?>"><?php echo $label ?></option>
+                                <?php
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="">Other Options</label><br/>
+                        <select class="form-control" name="others" id="others">
+                            <option value="0">Select a package</option>
+                        <?php
+                            $others = [
+                                'Photo Coverage - 3500 Php', 
+                                'Video Coverage - 3500 Php', 
+                                'Photobooth + Photo Coverage - 7500 Php', 
+                                'Photobooth + Video Coverage - 7500 Php',
+                                'Photobooth + Video Coverage w/ Album - 12000 Php', 
+                            ];
+                            for($i=0;$i<count($others);$i++) {
+                                ?>
+                                <option value="<?php echo $others[$i] ?>"><?php echo $others[$i] ?></option>
+                                <?php
+                            }
+                        ?>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-lg-4">
-                    <label for="">Theme Cake</label><br/>
-                    <select class="form-control" name="theme-cake" id="customer-cake">
-                        <option value="0">Select a cake</option>
-                    <?php
-                        $cake = ['Mocha Cake', 'Chocolate Cake'];
-                        for($i=0;$i<count($cake);$i++) {
-                            ?>
-                            <option value="<?php echo $cake[$i] ?>"><?php echo $cake[$i] ?> (Hello Kitty = 2000)</option>
-                            <?php
-                        }
-                    ?>
-                    </select>
-                </div>
-                <div class="col-lg-4">
-                    <label for="">Bundle Meal</label><br/>
-                    <select class="form-control" name="bundle-meal" id="bundle-meal">
-                        <option value="0">Select a meal</option>
-                    <?php
-                        $meal = ['A', 'B', 'C', 'D', 'E'];
-                        for($i=0;$i<count($meal);$i++) {
-                            ?>
-                            <option value="<?php echo $meal[$i] ?>">Meal - <?php echo $meal[$i] ?></option>
-                            <?php
-                        }
-                    ?>
-                    </select>
+                <div class="col-lg-6">
+                    <label for="">Preview</label>
                 </div>
             </div>
         </div>
