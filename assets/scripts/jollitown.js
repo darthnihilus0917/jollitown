@@ -167,7 +167,7 @@ $(function () {
 
       breakdown.after(`<tr class='favor'>
         <td>${label}</td>
-        <td>PHP ${parseFloat(breakdownResult).toFixed(2)}</td>
+        <td>&#8369 ${parseFloat(breakdownResult).toFixed(2)}</td>
         </tr>`);
 
         recomputeTotal();
@@ -227,7 +227,7 @@ $(function () {
 
       breakdown.after(`<tr class='cake'>
         <td>${label}</td>
-        <td>PHP ${parseFloat(breakdownResult).toFixed(2)}</td>
+        <td>&#8369 ${parseFloat(breakdownResult).toFixed(2)}</td>
         </tr>`);
 
       recomputeTotal();
@@ -293,7 +293,7 @@ $(function () {
 
       breakdown.after(`<tr class='meal'>
         <td>${label}</td>
-        <td>PHP ${parseFloat(breakdownResult).toFixed(2)}</td>
+        <td>&#8369 ${parseFloat(breakdownResult).toFixed(2)}</td>
         </tr>`);
 
       recomputeTotal();
@@ -372,7 +372,7 @@ $(function () {
       elements.forEach(element => element.remove());
       breakdown.after(`<tr class='others'>
         <td>${label}</td>
-        <td>PHP ${parseFloat(breakdownResult).toFixed(2)}</td>
+        <td>&#8369 ${parseFloat(breakdownResult).toFixed(2)}</td>
         </tr>`);
 
       recomputeTotal();
