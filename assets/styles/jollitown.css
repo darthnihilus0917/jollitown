@@ -103,7 +103,7 @@
     width: 50% !important;
 } */
 .breakdown-container {
-    border-bottom: solid 1px #999 !important;
+    border-bottom: solid 0px #999 !important;
 }
 .breakdown-container tr th {
     text-align: center !important;
@@ -120,6 +120,18 @@
     background-color: #ccc;
     padding: 4px;
 } */
+.total-holder {
+    border-top: solid 1px #999;
+}
+.total-value-label {
+    font-weight: bold;
+    text-align: right;
+}
+.total-value {
+    text-align: right;
+    color:rgba(220, 53, 69, 1) !important;
+    font-weight: bold;
+}
 .cart-title {
     background-color: rgba(220, 53, 69, 1);
     color: #fff;

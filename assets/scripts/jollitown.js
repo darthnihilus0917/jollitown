@@ -94,16 +94,21 @@ $(function () {
   const preview = $(".preview-wrapper").css({'text-align':'center'});
   const breakdown = $(".breakdown");
   const paymentAmount = $("#payment-amount");
+  const cartTotalValue = $(".total-value");
 
   let breakdownResult = null;
 
   function recomputeTotal() {
     let totalValue = 0;
-    for (let key in totalPrice[0]) {
-      totalValue += Number(totalPrice[0][key]);
+    if (totalPrice.length > 0) {
+      for (let key in totalPrice[0]) {
+        totalValue += Number(totalPrice[0][key]);
+      }
     }
     paymentAmount.val(parseFloat(totalValue).toFixed(2));
+    cartTotalValue.html(`&#8369 ${parseFloat(totalValue).toFixed(2)}`);
   }
+  recomputeTotal();
 
   const booking = $("#customer-booking-btn");
   const reservationModal = $("#reservationModal");

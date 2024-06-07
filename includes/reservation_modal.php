@@ -209,6 +209,10 @@
                                 <td></td>
                                 <td></td>
                             </tr>
+                            <tr class="total-holder">
+                                <td class="total-value-label">TOTAL</td>
+                                <td class="total-value"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
