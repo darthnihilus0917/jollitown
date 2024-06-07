@@ -91,6 +91,19 @@ $(function () {
 
   // RESERVATION
   const totalPrice = [];
+  const preview = $(".preview-wrapper").css({'text-align':'center'});
+  const breakdown = $(".breakdown");
+  const paymentAmount = $("#payment-amount");
+
+  let breakdownResult = null;
+
+  function recomputeTotal() {
+    let totalValue = 0;
+    for (let key in totalPrice[0]) {
+      totalValue += Number(totalPrice[0][key]);
+    }
+    paymentAmount.val(parseFloat(totalValue).toFixed(2));
+  }
 
   const booking = $("#customer-booking-btn");
   const reservationModal = $("#reservationModal");
@@ -107,10 +120,9 @@ $(function () {
     })
   });
 
-  const preview = $(".preview-wrapper").css({'text-align':'center'});
-
   const favors = $("#customer-favors");
   favors.on("change", function() {
+    let label = null;
     let selectedFavor = $(this).val().toLowerCase();
     if (selectedFavor === '0') {
       if (totalPrice.length > 0) {
@@ -122,7 +134,15 @@ $(function () {
       } 
       preview.html("");
 
+      const elements = document.querySelectorAll('.favor');
+      elements.forEach(element => element.remove());
+
+      recomputeTotal();
+
     } else {
+      label = $("#customer-favors option:selected").text();
+      label = label.split("-")[0];
+
       selectedFavor = selectedFavor.split(" ")[0].trim();
       if (totalPrice.length > 0) {
         totalPrice.forEach((obj) => {
@@ -135,15 +155,28 @@ $(function () {
       } else {
         totalPrice.push({favor: selectedFavor});
       }
-      console.log(totalPrice);
 
       const image = `./images/party/favors/${selectedFavor}.png`;
       preview.html(`<img src='${image}' style='width: 280px;'/>`);  
+
+      breakdownResult = totalPrice.map((item) => { return item.favor; });
+      if (totalPrice.length > 0) breakdown.addClass("d-none");
+
+      const elements = document.querySelectorAll('.favor');
+      elements.forEach(element => element.remove());
+
+      breakdown.after(`<tr class='favor'>
+        <td>${label}</td>
+        <td>PHP ${parseFloat(breakdownResult).toFixed(2)}</td>
+        </tr>`);
+
+        recomputeTotal();
     }
   });
 
   const cake = $("#customer-cake");
   cake.on("change", function() {
+    let label = null;
     let selectedCake = $(this).val().toLowerCase();
     if (selectedCake === '0') {
       if (totalPrice.length > 0) {
@@ -155,8 +188,14 @@ $(function () {
       } 
       preview.html("");
 
+      const elements = document.querySelectorAll('.cake');
+      elements.forEach(element => element.remove());
+
+      recomputeTotal();
+
     } else {
       let selectText = $("#customer-cake option:selected").text();
+      label = selectText.split("-")[0].trim();
       let pricing = selectText.split("-")[1].trim();
       pricing = pricing.split(" ")[0];
 
@@ -174,13 +213,25 @@ $(function () {
 
       selectedCake = selectedCake.split(" ")[0].trim();
       selectedCake =  (selectedCake === 'mocha') ? 'cake-1' : 'cake-2';
-      let extension = (selectedCake === 'mocha') ? '.jpg' : '.png';
+      let extension = '.png';
   
       selectedCake = `${selectedCake}${extension}`;
       const image = `./images/party/cake/${selectedCake}`;
       preview.html(`<img src='${image}' style='width: 280px;'/>`); 
+
+      breakdownResult = totalPrice.map((item) => { return item.cake; });
+      if (totalPrice.length > 0) breakdown.addClass("d-none");
+
+      const elements = document.querySelectorAll('.cake');
+      elements.forEach(element => element.remove());
+
+      breakdown.after(`<tr class='cake'>
+        <td>${label}</td>
+        <td>PHP ${parseFloat(breakdownResult).toFixed(2)}</td>
+        </tr>`);
+
+      recomputeTotal();
     }  
-    console.log(totalPrice); 
   });
 
   const meal = $("#bundle-meal");
@@ -188,6 +239,7 @@ $(function () {
     let selectedMeal = $(this).val().toLowerCase();
     let extension = null;
     let pricing = null;
+    let label = null;
     if (selectedMeal === '0') {
       if (totalPrice.length > 0) {
         if (Object.keys(totalPrice[0]).length > 1) {
@@ -198,7 +250,15 @@ $(function () {
       } 
       preview.html("");
 
+      const elements = document.querySelectorAll('.meal');
+      elements.forEach(element => element.remove());
+
+      recomputeTotal();
+
     } else {
+      label = $("#bundle-meal option:selected").text();
+      label = label.split("-")[0];
+
       pricing = selectedMeal.split("-")[1].trim();
       pricing = pricing.split(" ")[0].trim();
 
@@ -217,32 +277,59 @@ $(function () {
             totalPrice[0].meal = pricing;
           }
         });
+
       } else {
         totalPrice.push({meal: pricing});
       }
+
       const image = `./images/party/meal/${selectedMeal}`;
       preview.html(`<img src='${image}' style='width: 280px;'/>`);
+
+      breakdownResult = totalPrice.map((item) => { return item.meal; });
+      if (totalPrice.length > 0) breakdown.addClass("d-none");
+
+      const elements = document.querySelectorAll('.meal');
+      elements.forEach(element => element.remove());
+
+      breakdown.after(`<tr class='meal'>
+        <td>${label}</td>
+        <td>PHP ${parseFloat(breakdownResult).toFixed(2)}</td>
+        </tr>`);
+
+      recomputeTotal();
     }
-    console.log(totalPrice);
   });
 
   const theme = $("#customer-theme");
   theme.on("change", function() {
+    let label = null;
     let selectedTheme = $(this).val().toLowerCase();
     if (selectedTheme === "0") {
       preview.html(""); 
 
+      const elements = document.querySelectorAll('.item-theme');
+      elements.forEach(element => element.remove());
+
     } else {
+      label = $("#customer-theme option:selected").text();
       if (selectedTheme.includes(" ")) {
         selectedTheme = selectedTheme.replace(" ", "-");
       }
       const image = `./images/party/theme/${selectedTheme}.png`;
       preview.html(`<img src='${image}'/>`);
+
+      const elements = document.querySelectorAll('.item-theme');
+      elements.forEach(element => element.remove());
+      breakdown.after(`<tr class='item-theme'>
+        <td>Party Theme</td>
+        <td>${label}</td>
+        </tr>`);
     }
   });
 
   const otherPackage = $("#others");
   otherPackage.on("change", function() {
+    let label = null;
     let pricing = null;
     let othersSelected = $(this).val().toLocaleLowerCase();
     if (othersSelected === '0' || othersSelected === 'n.a') {
@@ -254,7 +341,14 @@ $(function () {
         }
       }
 
+      const elements = document.querySelectorAll('.others');
+      elements.forEach(element => element.remove());
+
+      recomputeTotal();
+
     } else {
+      label = $("#others option:selected").text();
+      label = label.split("-")[0];
       if (totalPrice.length > 0) {
         pricing = othersSelected.split("-")[1].trim();
         pricing = pricing.split(" ")[0].trim().trim();
@@ -270,8 +364,19 @@ $(function () {
         pricing = pricing.split(" ")[0].trim().trim();
         totalPrice.push({others: pricing});
       }
+
+      breakdownResult = totalPrice.map((item) => { return item.others; });
+      if (totalPrice.length > 0) breakdown.addClass("d-none");
+
+      const elements = document.querySelectorAll('.others');
+      elements.forEach(element => element.remove());
+      breakdown.after(`<tr class='others'>
+        <td>${label}</td>
+        <td>PHP ${parseFloat(breakdownResult).toFixed(2)}</td>
+        </tr>`);
+
+      recomputeTotal();
     }
-    console.log(totalPrice);
   });
 
   booking.on("click", function() {

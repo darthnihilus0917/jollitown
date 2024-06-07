@@ -99,3 +99,33 @@
 #reservation-calendar .many-events-few .fc-daygrid-event-dot {
     border: solid 4px #000 !important;
 }
+/* .breakdown-container tr td:first-child {
+    width: 50% !important;
+} */
+.breakdown-container {
+    border-bottom: solid 1px #999 !important;
+}
+.breakdown-container tr th {
+    text-align: center !important;
+}
+.breakdown-container tr td:last-child  {
+    text-align: right !important;
+}
+.breakdown-container tr td:last-child {
+    color:rgba(220, 53, 69, 1) !important;
+}
+/* .breakdown-container tr.breakdown {
+    text-align: center !important;
+    font-style: italic;
+    background-color: #ccc;
+    padding: 4px;
+} */
+.cart-title {
+    background-color: rgba(220, 53, 69, 1);
+    color: #fff;
+    text-align: center;
+    padding: 4px;
+}
+.d-none {
+    display: none;
+}

@@ -100,9 +100,10 @@
                         <?php
                             $favors = ['2000 Php', '1500 Php'];
                             for($i=0;$i<count($favors);$i++) {
-                                $label = "Party Favors" . $i+1 . " - " . $favors[$i];
+                                $labelID = $i + 1;
+                                $label = "Party Favors " . $labelID . " - " . $favors[$i];
                                 ?>
-                                <option value="<?php echo $favors[$i] ?>">Party Favors <?php echo $label ?></option>
+                                <option value="<?php echo $favors[$i] ?>"><?php echo $label ?></option>
                                 <?php
                             }
                         ?>
@@ -169,30 +170,49 @@
 
         <hr class="divider"/>
 
-        <h3>Payment</h3>
         <div class="container-response p-4">
             <div class="row" style="padding-top: 4px;">
-                <div class="col-lg-4">
-                    <label for="">Payment Option</label><br/>
-                    <select class="form-control" name="payment-terms" id="payment-mode">
-                        <option value="0"> Select a payment mode</option>
-                        <option value="Cash">Cash</option>
-                        <option value="GCash">GCash (09486502742)</option>
-                    </select>
+                <div class="col-lg-6">
+                    <h3>Payment</h3>
+                    <div>
+                        <label for="">Payment Amount (Php)</label><br/>
+                        <input class="form-control" type="number" name="payment-amount" id="payment-amount"/>
+                    </div>
+                    <div>
+                        <label for="">Payment Option</label><br/>
+                        <select class="form-control" name="payment-terms" id="payment-mode">
+                            <option value="0"> Select a payment mode</option>
+                            <option value="Cash">Cash</option>
+                            <option value="GCash">GCash (09486502742)</option>
+                        </select>
+                    </div>
+                    <div style="padding-bottom: 4px;">
+                        <label for="">Payment Terms</label><br/>
+                        <select class="form-control" name="payment-terms" id="payment-terms">
+                            <option value="0"> Select a payment terms</option>
+                            <option value="Partial">Partial Payment (Downpayment)</option>
+                            <option value="Full">Full Payment</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-lg-4">
-                    <label for="">Payment Terms</label><br/>
-                    <select class="form-control" name="payment-terms" id="payment-terms">
-                        <option value="0"> Select a payment terms</option>
-                        <option value="Partial">Partial Payment (Downpayment)</option>
-                        <option value="Full">Full Payment</option>
-                    </select>
+                <div class="col-lg-6">
+                    <h4 class="cart-title">Cart</h4>
+                    <table class="no-border breakdown-container" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Selections</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="breakdown">
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="col-lg-4">
-                    <label for="">Payment Amount (Php)</label><br/>
-                    <input class="form-control" type="number" name="payment-amount" id="payment-amount"/>
-                </div>
-            </div>            
+            </div>           
         </div>
 
         <hr class="divider"/>
@@ -213,7 +233,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
-        <button type="button" class="btn btn-danger" id="customer-booking-btn">Submit</button>
+        <button type="button" class="btn btn-warning" id="customer-booking-btn">Confirm Booking</button>
       </div>
     </div>
   </div>
