@@ -112,13 +112,31 @@ $(function () {
   const favors = $("#customer-favors");
   favors.on("change", function() {
     let selectedFavor = $(this).val().toLowerCase();
-    if (selectedFavor === "0") {
+    if (selectedFavor === '0') {
+      if (totalPrice.length > 0) {
+        if (Object.keys(totalPrice[0]).length > 1) {
+          delete totalPrice[0].favor;
+        } else {
+          totalPrice.length = 0;
+        }
+      } 
       preview.html("");
 
     } else {
       selectedFavor = selectedFavor.split(" ")[0].trim();
-      totalPrice.push({favor: selectedFavor});
+      if (totalPrice.length > 0) {
+        totalPrice.forEach((obj) => {
+          if (!obj.hasOwnProperty('favor')) {
+            totalPrice[0].favor = selectedFavor;
+          }  else {
+            totalPrice[0].favor = selectedFavor;
+          }
+        });
+      } else {
+        totalPrice.push({favor: selectedFavor});
+      }
       console.log(totalPrice);
+
       const image = `./images/party/favors/${selectedFavor}.png`;
       preview.html(`<img src='${image}' style='width: 280px;'/>`);  
     }
@@ -127,15 +145,32 @@ $(function () {
   const cake = $("#customer-cake");
   cake.on("change", function() {
     let selectedCake = $(this).val().toLowerCase();
-    if (selectedCake === "0") {
-      preview.html(""); 
+    if (selectedCake === '0') {
+      if (totalPrice.length > 0) {
+        if (Object.keys(totalPrice[0]).length > 1) {
+          delete totalPrice[0].cake;
+        } else {
+          totalPrice.length = 0;
+        }
+      } 
+      preview.html("");
 
     } else {
       let selectText = $("#customer-cake option:selected").text();
-      let pricing = selectText.split("-")[1].split(" ")[0];
-      console.log(pricing);
-      totalPrice.push({cake: pricing});
-      console.log(totalPrice);
+      let pricing = selectText.split("-")[1].trim();
+      pricing = pricing.split(" ")[0];
+
+      if (totalPrice.length > 0) {
+        totalPrice.forEach((obj) => {
+          if (!obj.hasOwnProperty('cake')) {
+            totalPrice[0].cake = pricing;
+          }  else {
+            totalPrice[0].cake = pricing;
+          }
+        });
+      } else {
+        totalPrice.push({cake: pricing});
+      }
 
       selectedCake = selectedCake.split(" ")[0].trim();
       selectedCake =  (selectedCake === 'mocha') ? 'cake-1' : 'cake-2';
@@ -144,7 +179,8 @@ $(function () {
       selectedCake = `${selectedCake}${extension}`;
       const image = `./images/party/cake/${selectedCake}`;
       preview.html(`<img src='${image}' style='width: 280px;'/>`); 
-    }   
+    }  
+    console.log(totalPrice); 
   });
 
   const meal = $("#bundle-meal");
@@ -152,22 +188,42 @@ $(function () {
     let selectedMeal = $(this).val().toLowerCase();
     let extension = null;
     let pricing = null;
-    if (selectedMeal !== 0) {
+    if (selectedMeal === '0') {
+      if (totalPrice.length > 0) {
+        if (Object.keys(totalPrice[0]).length > 1) {
+          delete totalPrice[0].meal;
+        } else {
+          totalPrice.length = 0;
+        }
+      } 
+      preview.html("");
+
+    } else {
+      pricing = selectedMeal.split("-")[1].trim();
+      pricing = pricing.split(" ")[0].trim();
+
       selectedMeal = selectedMeal.split("-")[0].trim();
-      pricing = selectedMeal.split(" ")[2];
       extension = (selectedMeal === 'c') ? '.jpg' : '.png';
       if (selectedMeal.includes(" ")) {
         selectedMeal = selectedMeal.replace(" ", "-");
       }
       selectedMeal = `meal-${selectedMeal}${extension}`;
-      totalPrice.push({meal: pricing});
-      console.log(totalPrice);
+
+      if (totalPrice.length > 0) {
+        totalPrice.forEach((obj) => {
+          if (!obj.hasOwnProperty('meal')) {
+            totalPrice[0].meal = pricing;
+          }  else {
+            totalPrice[0].meal = pricing;
+          }
+        });
+      } else {
+        totalPrice.push({meal: pricing});
+      }
       const image = `./images/party/meal/${selectedMeal}`;
       preview.html(`<img src='${image}' style='width: 280px;'/>`);
-
-    } else {
-      preview.html(""); 
     }
+    console.log(totalPrice);
   });
 
   const theme = $("#customer-theme");
@@ -187,12 +243,35 @@ $(function () {
 
   const otherPackage = $("#others");
   otherPackage.on("change", function() {
+    let pricing = null;
     let othersSelected = $(this).val().toLocaleLowerCase();
-    if (othersSelected !== "0" || othersSelected !== "n/a") {
-      let pricing = others.split("-")[1].split(" ")[0];
-      totalPrice.push({others:pricing});
-      console.log(totalPrice);
+    if (othersSelected === '0' || othersSelected === 'n.a') {
+      if (totalPrice.length > 0) {
+        if (Object.keys(totalPrice[0]).length > 1) {
+          delete totalPrice[0].others;
+        } else {
+          totalPrice.length = 0;
+        }
+      }
+
+    } else {
+      if (totalPrice.length > 0) {
+        pricing = othersSelected.split("-")[1].trim();
+        pricing = pricing.split(" ")[0].trim().trim();
+        totalPrice.forEach((obj) => {
+          if (!obj.hasOwnProperty('others')) {
+            totalPrice[0].others = pricing;
+          }  else {
+            totalPrice[0].others = pricing;
+          }
+        });
+      } else {
+        pricing = othersSelected.split("-")[1].trim();
+        pricing = pricing.split(" ")[0].trim().trim();
+        totalPrice.push({others: pricing});
+      }
     }
+    console.log(totalPrice);
   });
 
   booking.on("click", function() {

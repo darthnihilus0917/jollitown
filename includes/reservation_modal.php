@@ -82,7 +82,7 @@
                     <div>
                         <label for="">Pick A Theme</label><br/>
                         <select class="form-control" name="party-theme" id="customer-theme">
-                            <option>Select a theme</option>
+                            <option value="0">Select a theme</option>
                         <?php
                             $theme = ['Factory', 'Hello Kitty', 'Jollitown', 'Race'];
                             for($i=0;$i<count($theme);$i++) {
@@ -96,7 +96,7 @@
                     <div>
                         <label for="">Party Favors</label><br/>
                         <select class="form-control" name="party-favors" id="customer-favors">
-                            <option>Select party favors</option>
+                            <option value="0">Select party favors</option>
                         <?php
                             $favors = ['2000 Php', '1500 Php'];
                             for($i=0;$i<count($favors);$i++) {
@@ -156,7 +156,7 @@
                                 <?php
                             }
                         ?>
-                            <option value="n/a">N/A</option>
+                            <option value="n.a">N.A</option>
                         </select>
                     </div>
                 </div>
