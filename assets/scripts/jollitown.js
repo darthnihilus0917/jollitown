@@ -2,7 +2,30 @@ document.addEventListener('DOMContentLoaded', function() {
   let calendarEl = document.getElementById('reservation-calendar');
   let calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
-      events: 'admin/calendar_data.php'
+      events: 'admin/calendar_data.php',
+      dayCellDidMount: function(info) {
+        let events = document.querySelectorAll('.fc-daygrid-day-events');
+        let dayBookedCount = 0;
+        events.forEach((cell) => {
+          setTimeout(() => {
+            let parentEl = cell.parentElement;
+            dayBookedCount = cell.querySelectorAll('.fc-daygrid-event-harness').length;
+
+            if (dayBookedCount >= 3) {
+              parentEl.classList.add('many-events-fullybooked');
+              parentEl.classList.remove('many-events-few');
+            } 
+            if (dayBookedCount < 3) {
+              parentEl.classList.add('many-events-few');
+              parentEl.classList.remove('many-events-fullybooked');
+            } 
+            if (dayBookedCount === 0) {
+              parentEl.style.backgroundColor = 'white';
+              parentEl.classList.remove('many-events-fullybooked', 'many-events-few');
+            }
+          }, 500);
+        });
+      }
   });
   calendar.render();
 });
@@ -67,6 +90,8 @@ $(function () {
   $().UItoTop({ easingType: "easeOutQuart" });
 
   // RESERVATION
+  const totalPrice = [];
+
   const booking = $("#customer-booking-btn");
   const reservationModal = $("#reservationModal");
   reservationModal.on('shown.bs.modal', function() {
@@ -82,17 +107,94 @@ $(function () {
     })
   });
 
-  const preview = $(".preview-wrapper");
+  const preview = $(".preview-wrapper").css({'text-align':'center'});
 
   const favors = $("#customer-favors");
+  favors.on("change", function() {
+    let selectedFavor = $(this).val().toLowerCase();
+    if (selectedFavor === "0") {
+      preview.html("");
+
+    } else {
+      selectedFavor = selectedFavor.split(" ")[0].trim();
+      totalPrice.push({favor: selectedFavor});
+      console.log(totalPrice);
+      const image = `./images/party/favors/${selectedFavor}.png`;
+      preview.html(`<img src='${image}' style='width: 280px;'/>`);  
+    }
+  });
+
   const cake = $("#customer-cake");
+  cake.on("change", function() {
+    let selectedCake = $(this).val().toLowerCase();
+    if (selectedCake === "0") {
+      preview.html(""); 
+
+    } else {
+      let selectText = $("#customer-cake option:selected").text();
+      let pricing = selectText.split("-")[1].split(" ")[0];
+      console.log(pricing);
+      totalPrice.push({cake: pricing});
+      console.log(totalPrice);
+
+      selectedCake = selectedCake.split(" ")[0].trim();
+      selectedCake =  (selectedCake === 'mocha') ? 'cake-1' : 'cake-2';
+      let extension = (selectedCake === 'mocha') ? '.jpg' : '.png';
+  
+      selectedCake = `${selectedCake}${extension}`;
+      const image = `./images/party/cake/${selectedCake}`;
+      preview.html(`<img src='${image}' style='width: 280px;'/>`); 
+    }   
+  });
+
   const meal = $("#bundle-meal");
+  meal.on("change", function() {
+    let selectedMeal = $(this).val().toLowerCase();
+    let extension = null;
+    let pricing = null;
+    if (selectedMeal !== 0) {
+      selectedMeal = selectedMeal.split("-")[0].trim();
+      pricing = selectedMeal.split(" ")[2];
+      extension = (selectedMeal === 'c') ? '.jpg' : '.png';
+      if (selectedMeal.includes(" ")) {
+        selectedMeal = selectedMeal.replace(" ", "-");
+      }
+      selectedMeal = `meal-${selectedMeal}${extension}`;
+      totalPrice.push({meal: pricing});
+      console.log(totalPrice);
+      const image = `./images/party/meal/${selectedMeal}`;
+      preview.html(`<img src='${image}' style='width: 280px;'/>`);
+
+    } else {
+      preview.html(""); 
+    }
+  });
+
   const theme = $("#customer-theme");
   theme.on("change", function() {
-    console.log($(this).val())
-  })
+    let selectedTheme = $(this).val().toLowerCase();
+    if (selectedTheme === "0") {
+      preview.html(""); 
+
+    } else {
+      if (selectedTheme.includes(" ")) {
+        selectedTheme = selectedTheme.replace(" ", "-");
+      }
+      const image = `./images/party/theme/${selectedTheme}.png`;
+      preview.html(`<img src='${image}'/>`);
+    }
+  });
 
   const otherPackage = $("#others");
+  otherPackage.on("change", function() {
+    let othersSelected = $(this).val().toLocaleLowerCase();
+    if (othersSelected !== "0" || othersSelected !== "n/a") {
+      let pricing = others.split("-")[1].split(" ")[0];
+      totalPrice.push({others:pricing});
+      console.log(totalPrice);
+    }
+  });
+
   booking.on("click", function() {
     const celebrantName = $("#celebrant-name");
     const customerName = $("#customer-name");

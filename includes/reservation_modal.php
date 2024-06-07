@@ -156,6 +156,7 @@
                                 <?php
                             }
                         ?>
+                            <option value="n/a">N/A</option>
                         </select>
                     </div>
                 </div>

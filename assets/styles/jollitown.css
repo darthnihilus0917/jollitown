@@ -57,11 +57,14 @@
     background-color: gold !important;
     color: #222;
 }
+#reservation-calendar .fc-daygrid-day {
+    background-color: #fff;
+}
 #reservation-calendar .fc-daygrid-day-number {
-    color: gold !important;
+    color: #6d0b1d !important;
 }
 #reservation-calendar a.fc-event {
-    color: gold !important;
+    color: #222 !important;
 }
 #reservation-calendar .fc-daygrid-event-dot {
     border: solid 4px gold !important;
@@ -75,4 +78,24 @@
 #reservation-modal .preview-wrapper {
     background-color: #ccc;
     min-height: 20px;
+}
+
+#reservation-calendar .many-events-fullybooked {
+    background-color: #999;
+}
+#reservation-calendar .many-events-fullybooked a {
+    color: #000 !important;
+}
+#reservation-calendar .many-events-fullybooked .fc-daygrid-event-dot {
+    border: solid 4px #000 !important;
+}
+
+#reservation-calendar .many-events-few {
+    background-color: #99e699;
+}
+#reservation-calendar .many-events-few a {
+    color: #000 !important;
+}
+#reservation-calendar .many-events-few .fc-daygrid-event-dot {
+    border: solid 4px #000 !important;
 }

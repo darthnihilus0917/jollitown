@@ -2,7 +2,30 @@ document.addEventListener('DOMContentLoaded', function() {
     let calendarEl = document.getElementById('reservation-calendar');
     let calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        events: 'calendar_data.php'
+        events: 'calendar_data.php',
+        dayCellDidMount: function(info) {
+            let events = document.querySelectorAll('.fc-daygrid-day-events');
+            let dayBookedCount = 0;
+            events.forEach((cell) => {
+              setTimeout(() => {
+                let parentEl = cell.parentElement;
+                dayBookedCount = cell.querySelectorAll('.fc-daygrid-event-harness').length;
+    
+                if (dayBookedCount >= 3) {
+                  parentEl.classList.add('many-events-fullybooked');
+                  parentEl.classList.remove('many-events-few');
+                } 
+                if (dayBookedCount < 3) {
+                  parentEl.classList.add('many-events-few');
+                  parentEl.classList.remove('many-events-fullybooked');
+                } 
+                if (dayBookedCount === 0) {
+                  parentEl.style.backgroundColor = 'white';
+                  parentEl.classList.remove('many-events-fullybooked', 'many-events-few');
+                }
+              }, 500);
+            });
+        }
     });
     calendar.render();
 });
