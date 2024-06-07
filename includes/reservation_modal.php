@@ -57,7 +57,7 @@
                 <li>Party schedule has 3 schedules per day: 10AM-12PM | 1-3PM | 4-6PM.</li>
             </ul>
             <div class="row" style="padding-top: 4px;">
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <label for="">Reservation Type</label><br/>
                     <select name="reservation-type" id="customer-reservation-type" class="form-control">
                         <option value="0">Select reservation type</option>
@@ -71,9 +71,13 @@
                         ?>
                     </select>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
                     <label for="">Event Date & Time</label><br/>
                     <input class="form-control" type="datetime-local" name="customer-reservation-date" id="customer-reservation-date" placeholder="Reservation Date"/>
+                </div>
+                <div class="col-lg-4">
+                    <label for="">Expected Number Guest</label><br/>
+                    <input class="form-control" type="number" name="customer-guest" id="customer-guest" placeholder="Guest"/>
                 </div>
             </div>
 

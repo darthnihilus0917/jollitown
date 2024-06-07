@@ -277,14 +277,14 @@ $(function () {
       if (totalPrice.length > 0) {
         totalPrice.forEach((obj) => {
           if (!obj.hasOwnProperty('meal')) {
-            totalPrice[0].meal = pricing;
+            totalPrice[0].meal = Number(pricing) * Number(guest.val());
           }  else {
-            totalPrice[0].meal = pricing;
+            totalPrice[0].meal = Number(pricing) * Number(guest.val());
           }
         });
 
       } else {
-        totalPrice.push({meal: pricing});
+        totalPrice.push({meal: Number(pricing) * Number(guest.val()) });
       }
 
       const image = `./images/party/meal/${selectedMeal}`;
@@ -383,6 +383,23 @@ $(function () {
       recomputeTotal();
     }
   });
+
+  const guest = $("#customer-guest");
+  guest.on("keyup", function() {
+    if (totalPrice.length > 0) {
+      if (totalPrice[0].hasOwnProperty('meat')) {
+
+        console.log(typeof totalPrice[0])
+
+        pricing = $("#bundle-meal").split("-")[1].trim();
+        pricing = pricing.split(" ")[0].trim();
+
+        totalPrice[0].meat = Number($(this).val()) * Number(pricing);
+
+        console.log(totalPrice);
+      }
+    }
+  })
 
   booking.on("click", function() {
     const celebrantName = $("#celebrant-name");
