@@ -439,6 +439,7 @@ $(function () {
       paymentTerms.val("0");
       amount.val("");
       otherPackage.val("0");
+      guest.val("");
       agreed.prop("checked", false);
     }
 
@@ -465,7 +466,8 @@ $(function () {
       paymentTerms: paymentTerms.val(),
       amount: amount.val(),
       balance: 0,
-      agreed: agreed.is(":checked")
+      agreed: agreed.is(":checked"),
+      guest: guest.val()
     }
     // console.log(payload)
 
