@@ -73,6 +73,9 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
                 <option value="0">Select a gender</option>
                 <?php
                 $value = ($field != null) ? $field['gender'] : "";
+                $maleSelected = "";
+                $femaleSelected = "";
+                $nbSelected = "";               
                 $selected = "";
                 if ($value != "") {
                     $maleSelected = ($value == "M") ? "selected" : "";
@@ -236,6 +239,8 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <select class="form-control" name="payment-mode" id="payment-mode" <?php echo $fieldDisabled ?>>
                 <?php
                     $value = ($field != null) ? $field['payment_mode'] : "";
+                    $cashSelected = "";
+                    $gcashSelected = "";
                     $selected = "";
                     if ($value != "") {
                         $cashSelected = ($value == "Cash") ? "selected" : "";
@@ -256,6 +261,8 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <select class="form-control" name="payment-terms" id="payment-terms" <?php echo $fieldDisabled ?>>
                 <?php
                     $value = ($field != null) ? $field['payment'] : "";
+                    $partialSelected = "";
+                    $fullSelected = "";
                     $selected = "";
                     if ($value != "") {
                         $partialSelected = ($value == "Partial") ? "selected" : "";
@@ -300,6 +307,8 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <select class="form-select" name="event-status" id="event-status" <?php echo $fieldDisabled ?>>
                 <?php
                 $value = ($field != null) ? $field['is_done'] : "";
+                $yesSelected = "";
+                $noSelected = "";
                 $selected = "";
                 if ($value != "") {
                     $value = ($value == "0") ? "No" : "Yes";
