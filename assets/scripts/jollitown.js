@@ -110,6 +110,15 @@ $(function () {
   }
   recomputeTotal();
 
+  const balance = $("#balance");
+  const downpayment = $("#downpayment");
+  downpayment.on("keyup", function(e) {
+    const down = Number($(this).val());
+    const payment = Number(paymentAmount.val());
+    const remainingBalance = payment - down;
+    balance.val(remainingBalance);
+  });
+
   const booking = $("#customer-booking-btn");
   const reservationModal = $("#reservationModal");
   reservationModal.on('shown.bs.modal', function() {
@@ -441,6 +450,8 @@ $(function () {
       otherPackage.val("0");
       guest.val("");
       agreed.prop("checked", false);
+      downpayment.val("");
+      balance.val("");
     }
 
     const payload = {
@@ -465,9 +476,11 @@ $(function () {
       paymentMode: paymentMode.val(),
       paymentTerms: paymentTerms.val(),
       amount: amount.val(),
-      balance: 0,
+      downpayment: downpayment.val(),
+      balance: balance.val(),
       agreed: agreed.is(":checked"),
-      guest: guest.val()
+      guest: guest.val(),
+
     }
     // console.log(payload)
 

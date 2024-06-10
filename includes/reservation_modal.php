@@ -180,7 +180,15 @@
                     <h3>Payment</h3>
                     <div>
                         <label for="">Payment Amount (Php)</label><br/>
-                        <input class="form-control" type="number" name="payment-amount" id="payment-amount"/>
+                        <input class="form-control" type="text" name="payment-amount" id="payment-amount"/>
+                    </div>
+                    <div>
+                        <label for="">Downpayment</label><br/>
+                        <input class="form-control" type="text" name="downpayment" id="downpayment"/>
+                    </div>
+                    <div>
+                        <label for="">Balance</label><br/>
+                        <input class="form-control" type="text" name="balance" id="balance"/>
                     </div>
                     <div>
                         <label for="">Payment Option</label><br/>
