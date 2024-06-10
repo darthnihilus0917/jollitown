@@ -79,13 +79,36 @@ $(function() {
         const balance = $("#payment-balance");
         const downpayment = $("#payment-downpayment");
 
-        const fields = [celebrantName, customerName, mobile, age, nickname, 
+        const fields = [celebrantName, customerName, mobile, nickname, 
             customerReservationType, customerReservationDate,
             favors, cake, meal, theme, paymentMode, paymentTerms];
         fields.forEach((field) => {
             field.on("keyup", function() { processResult.text("");});
             field.on("change", function() { processResult.text(""); });
-        });
+        });        
+        
+        function reset() {
+            celebrantName.val("");
+            customerName.val("");
+            eventDateTime.val("");
+            evenStatus.val("0");
+            customerReservationType.val("0");
+            customerReservationDate.val("");
+            mobile.val("");
+            age.val("");
+            gender.val("0");
+            nickname.val("");
+            favors.val("0");
+            cake.val("0");
+            meal.val("0");
+            theme.val("0");
+            paymentMode.val("0");
+            paymentTerms.val("");
+            amount.val("");
+            balance.val("");
+            downpayment.val("");
+            processResult.text("");
+        }
 
         const payload = {
             module: 'customers',
@@ -109,7 +132,9 @@ $(function() {
             paymentTerms: paymentTerms.val(),
             amount: amount.val(),
             balance: balance.val(),
-            downpayment: downpayment.val()
+            downpayment: downpayment.val(),
+            agreed: true,
+            others: 0
         }
         console.log(payload)
 

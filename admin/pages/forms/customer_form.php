@@ -211,7 +211,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
                             $value = explode(" ", $value)[0];
                             $value = $value . " Cake";
                         }
-                        var_dump($value);
+                        // var_dump($value);
                         $selected = ($value == $cake[$i]) ? "selected" : "";
                     }
                     ?>
