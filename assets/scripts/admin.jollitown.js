@@ -128,6 +128,7 @@ $(function() {
                     $(this).text("Saving...").attr("disabled", true);
                 },
                 success: function(data) {
+                    console.log(data);
                     $(this).text("Save").attr("disabled", false);
                     const { isProcessed, msg } = JSON.parse(data);
                     if (isProcessed) {
@@ -140,7 +141,7 @@ $(function() {
                     if (payload.process === 'edit') {
                         setTimeout(() => { location.reload(); }, 3000);
                     }
-                    if (payload.process === 'delete') window.location.href = `?page=users`;
+                    if (payload.process === 'delete') window.location.href = `?page=customers`;
                 }
             });
         }

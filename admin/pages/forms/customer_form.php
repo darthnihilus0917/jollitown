@@ -173,7 +173,12 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
                     $value = ($field != null) ? $field['favors'] : "";
                     $selected = "";
                     if ($value != "") {
-                        $value = (strpos($value, " ")) ? explode(" ", $value)[0] : $value;
+                        if (strpos($value, "=")) {
+                            $value = explode(" = ", $value)[1];
+                        } else if (strpos($value, " ")) {
+                            $value = explode(" ", $value)[0];
+                        }
+                        //$value = (strpos($value, " ")) ? explode(" ", $value)[0] : $value;
                         $selected = ($value == $favors[$i]) ? "selected" : "";
                     }
                     ?>
@@ -197,6 +202,16 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
                     $value = ($field != null) ? $field['cake'] : "";
                     $selected = "";
                     if ($value != "") {
+                        if (strpos($value, "=")) {
+                            $value = explode(" = ", $value)[0];
+                            $value = explode(" ", $value)[0];
+                            $value = $value . " Cake";
+
+                        } else if (strpos($value, " ")) {
+                            $value = explode(" ", $value)[0];
+                            $value = $value . " Cake";
+                        }
+                        var_dump($value);
                         $selected = ($value == $cake[$i]) ? "selected" : "";
                     }
                     ?>

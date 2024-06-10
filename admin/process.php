@@ -57,12 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $balance = htmlspecialchars(trim($_POST['balance']));
                     $downpayment = htmlspecialchars(trim($_POST['downpayment']));
 
-                    $sql = "UPDATE booking 
-                        SET cname='".$celebrantName."', name='".$customerName."', rdates='".$reservationDate."', reservation='".$reservationType."', event_datetime='".$eventDateTime."', is_done='".$eventStatus."',
-                        mobile='".$mobile."', age='".$age."', gender='".$gender."', nickname='".$nickname."', payment_balance='".$balance."', payment_dp='".$downpayment."', payment_amount='".$amount."',
-                        favors='".$favors."', cake='".$cake."', meal='".$meal."', theme='".$theme."'
+                    $sql = "UPDATE booking SET cname='".$celebrantName."', name='".$customerName."', rdates='".$reservationDate."', reservation='".$reservationType."', event_datetime='".$eventDateTime."', is_done='".$eventStatus."',
+                        mobile='".$mobile."', age='".$age."', gender='".$gender."', nickname='".$nickname."', payment_balance='".$balance."', payment_dp='".$downpayment."', payment_amount='".$amount."', favors='".$favors."', cake='".$cake."'
                         WHERE id='".$id."'";
+
+                    // $sql = "UPDATE booking SET cname='".$celebrantName."', name='".$customerName."', rdates='".$reservationDate."', reservation='".$reservationType."', event_datetime='".$eventDateTime."', is_done='".$eventStatus."',
+                    //     mobile='".$mobile."', age='".$age."', gender='".$gender."', nickname='".$nickname."', payment_balance='".$balance."', payment_dp='".$downpayment."', payment_amount='".$amount."',
+                    //     favors='".$favors."', cake='".$cake."', meal='".$meal."', theme='".$theme."'
+                    //     WHERE id='".$id."'";
                     
+                    // echo $conn->query($sql);
+
                     try {
                         if($conn->query($sql)) {
                             $response = [
