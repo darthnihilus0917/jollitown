@@ -141,7 +141,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <select class="form-control" name="party-theme" id="customer-theme">
                 <option>Select a theme</option>
             <?php
-                $theme = ['Party Hats', 'Invitational Card', 'Trayliner', 'Message Board'];
+                $theme = ['Factory', 'Hello Kitty', 'Jollitown', 'Race'];
                 for($i=0;$i<count($theme);$i++) {
                     $value = ($field != null) ? $field['themes'] : "";
                     var_dump($value);
@@ -170,6 +170,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
                     $value = ($field != null) ? $field['favors'] : "";
                     $selected = "";
                     if ($value != "") {
+                        $value = (strpos($value, " ")) ? explode(" ", $value)[0] : $value;
                         $selected = ($value == $favors[$i]) ? "selected" : "";
                     }
                     ?>
@@ -216,6 +217,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
                     $value = ($field != null) ? $field['meal'] : "";
                     $selected = "";
                     if ($value != "") {
+                        $value = (strpos($value, " - ")) ? explode(" - ", $value)[0] : $value;                  
                         $selected = ($value == $meal[$i]) ? "selected" : "";
                     }
                     ?>
@@ -254,7 +256,6 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
             <select class="form-control" name="payment-terms" id="payment-terms" <?php echo $fieldDisabled ?>>
                 <?php
                     $value = ($field != null) ? $field['payment'] : "";
-                    var_dump($value);
                     $selected = "";
                     if ($value != "") {
                         $partialSelected = ($value == "Partial") ? "selected" : "";
@@ -277,7 +278,15 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
     </div>
     <div class="row mb-2">
         <div class="col-lg-2 label-placeholder">
-            <label for="">Payment Balance:</label>
+            <label for="">Downpayment:</label>
+        </div>
+        <div class="col-lg-10">
+            <input class="form-control" type="number" name="payment-downpayment" id="payment-downpayment" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['payment_dp'] : "" ?>"/>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-lg-2 label-placeholder">
+            <label for="">Balance:</label>
         </div>
         <div class="col-lg-10">
             <input class="form-control" type="number" name="payment-balance" id="payment-balance" <?php echo $fieldStatus ?> value="<?php echo ($field != null) ? $field['payment_balance'] : "" ?>"/>
@@ -320,6 +329,8 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
         } else {
             ?>
             <div class="col-lg-6">
+                <button class="btn btn-primary" id="print-report">
+                    <span>Print</span></button>
                 <button class="btn btn-success" id="customer-save">
                     <span class="px-4">Save</span>
                 </button>

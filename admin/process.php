@@ -55,6 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $paymentTerms = htmlspecialchars(trim($_POST['paymentTerms']));
                     $amount = htmlspecialchars(trim($_POST['amount']));
                     $balance = htmlspecialchars(trim($_POST['balance']));
+                    $downpayment = htmlspecialchars(trim($_POST['downpayment']));
 
                     $sql = "UPDATE booking 
                         SET cname='".$celebrantName."', name='".$customerName."', rdates='".$reservationDate."', reservation='".$reservationType."', event_datetime='".$eventDateTime."', is_done='".$eventStatus."',
@@ -108,9 +109,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $reservationDate = htmlspecialchars(trim($_POST['reservationDate']));
                     $agreement = htmlspecialchars(trim($_POST['agreed']));
                     $agreement = ($agreement) ? "agree" : "";
+                    $balance = htmlspecialchars(trim($_POST['balance']));
+                    $downpayment = htmlspecialchars(trim($_POST['downpayment']));
 
-                    $sql = "INSERT INTO booking(name,cname,mobile,rdates,themes,gender,age,nickname,reservation,favors,cake,meal,payment,agreement,is_done,event_datetime,payment_mode,payment_amount, others)
-                        VALUES('".$customerName."','".$celebrantName."','".$mobile."',now(),'".$theme."','".$gender."','".$age."','".$nickname."','".$reservationType."','".$favors."','".$cake."','".$meal."','".$paymentTerms."','".$agreement."','".$eventStatus."','".$eventDateTime."','".$paymentMode."','".$amount."', '".$others."')";
+                    $sql = "INSERT INTO booking(name,cname,mobile,rdates,themes,gender,age,nickname,reservation,favors,cake,meal,payment,agreement,is_done,event_datetime,payment_mode,payment_amount, others, payment_balance, payment_dp)
+                        VALUES('".$customerName."','".$celebrantName."','".$mobile."',now(),'".$theme."','".$gender."','".$age."','".$nickname."','".$reservationType."','".$favors."','".$cake."','".$meal."','".$paymentTerms."','".$agreement."','".$eventStatus."','".$eventDateTime."','".$paymentMode."','".$amount."', '".$others."', '".$balance."', '".$downpayment."')";
 
                     try {
                         if($conn->query($sql)) {

@@ -111,11 +111,13 @@ $(function () {
   recomputeTotal();
 
   const balance = $("#balance");
+  let paymentBalance = 0;
   const downpayment = $("#downpayment");
   downpayment.on("keyup", function(e) {
     const down = Number($(this).val());
     const payment = Number(paymentAmount.val());
     const remainingBalance = payment - down;
+    paymentBalance = remainingBalance;
     balance.val(remainingBalance);
   });
 
@@ -477,12 +479,12 @@ $(function () {
       paymentTerms: paymentTerms.val(),
       amount: amount.val(),
       downpayment: downpayment.val(),
-      balance: balance.val(),
+      balance: paymentBalance,
       agreed: agreed.is(":checked"),
       guest: guest.val(),
 
     }
-    // console.log(payload)
+    console.log(payload)
 
     $.ajax({
       method: 'POST',

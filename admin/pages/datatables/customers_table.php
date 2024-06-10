@@ -37,6 +37,7 @@ include('./../config/db.php');
                 $favors = $row["favors"];
                 $cake = $row["cake"];
                 $meal = $row["meal"];
+                $meal = (strpos($meal, " - ")) ? explode(" - ", $meal)[0] : $meal;
                 $dateCreated = $row["date_created"];
 
                 $default = "?page=customers&process=";

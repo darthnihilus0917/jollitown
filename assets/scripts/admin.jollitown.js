@@ -77,6 +77,7 @@ $(function() {
         const paymentTerms = $("#payment-terms");
         const amount = $("#payment-amount");
         const balance = $("#payment-balance");
+        const downpayment = $("#payment-downpayment");
 
         const fields = [celebrantName, customerName, mobile, age, nickname, 
             customerReservationType, customerReservationDate,
@@ -107,7 +108,8 @@ $(function() {
             paymentMode: paymentMode.val(),
             paymentTerms: paymentTerms.val(),
             amount: amount.val(),
-            balance: balance.val()
+            balance: balance.val(),
+            downpayment: downpayment.val()
         }
         console.log(payload)
 
@@ -276,6 +278,11 @@ $(function() {
                 }
             });
         }
+    });
+
+    const print = $("#print-report");
+    print.on("click", function() {
+        window.print();
     });
 
     // const calendarEl = $("#reservation-calendar");

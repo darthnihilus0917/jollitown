@@ -192,7 +192,7 @@
                     </div>
                     <div>
                         <label for="">Payment Option</label><br/>
-                        <select class="form-control" name="payment-terms" id="payment-mode">
+                        <select class="form-control" name="payment-mode" id="payment-mode">
                             <option value="0"> Select a payment mode</option>
                             <option value="Cash">Cash</option>
                             <option value="GCash">GCash (09486502742)</option>
