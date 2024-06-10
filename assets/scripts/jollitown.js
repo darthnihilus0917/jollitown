@@ -113,12 +113,16 @@ $(function () {
   const balance = $("#balance");
   let paymentBalance = 0;
   const downpayment = $("#downpayment");
+  const tableDP = $(".down-value");
+  const tableBal = $(".balance-value");
   downpayment.on("keyup", function(e) {
     const down = Number($(this).val());
     const payment = Number(paymentAmount.val());
     const remainingBalance = payment - down;
     paymentBalance = remainingBalance;
     balance.val(remainingBalance);
+    tableDP.text(`-${parseFloat(down).toFixed(2)}`);
+    tableBal.text(parseFloat(remainingBalance).toFixed(2));
   });
 
   const booking = $("#customer-booking-btn");

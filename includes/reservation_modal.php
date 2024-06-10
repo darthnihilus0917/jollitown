@@ -225,6 +225,14 @@
                                 <td class="total-value-label">TOTAL</td>
                                 <td class="total-value"></td>
                             </tr>
+                            <tr class="party-dp">
+                                <td class="total-value-label">Downpayment</td>
+                                <td class="down-value">-0.00</td>
+                            </tr>
+                            <tr class="party-balance">
+                                <td class="total-value-label">Balance</td>
+                                <td class="balance-value">0.00</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

@@ -132,6 +132,11 @@
     color:rgba(220, 53, 69, 1) !important;
     font-weight: bold;
 }
+.breakdown-container tr td.down-value {
+    text-align: right;
+    color: green !important;
+    font-weight: bold;
+}
 .cart-title {
     background-color: rgba(220, 53, 69, 1);
     color: #fff;

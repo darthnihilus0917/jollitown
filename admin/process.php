@@ -59,7 +59,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     $sql = "UPDATE booking 
                         SET cname='".$celebrantName."', name='".$customerName."', rdates='".$reservationDate."', reservation='".$reservationType."', event_datetime='".$eventDateTime."', is_done='".$eventStatus."',
-                        mobile='".$mobile."', age='".$age."', gender='".$gender."', nickname='".$nickname."'
+                        mobile='".$mobile."', age='".$age."', gender='".$gender."', nickname='".$nickname."', payment_balance='".$balance."', payment_dp='".$downpayment."', payment_amount='".$amount."',
+                        favors='".$favors."', cake='".$cake."', meal='".$meal."', theme='".$theme."'
                         WHERE id='".$id."'";
                     
                     try {
