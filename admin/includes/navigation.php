@@ -1,9 +1,13 @@
 <?php
 function highlighter($linkName) {
-    $page = $_GET['page'];
-    if (empty($page)) return "";
-
-    return ($linkName == $page) ? "active" : "";
+    if (issset($_GET['page'])) {
+        $page = $_GET['page'];
+        if (empty($page)) return "";
+    
+        return ($linkName == $page) ? "active" : "";
+    } else {
+        return ""
+    }
 }
 ?>
 
