@@ -67,35 +67,54 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $eventDate = DateTime::createFromFormat('Y-m-d\TH:i', $eventDateTime)->format('Y-m-d');
                     $dateCountCheck = "SELECT * FROM booking WHERE event_datetime LIKE '%".$eventDate."%'";
 
+                    $eventTime = DateTime::createFromFormat('Y-m-d\TH:i', $eventDateTime)->format('H:i');
+                    // $timeCheck = "SELECT * FROM booking WHERE TIME(event_datetime) < '".$eventTime."' OR TIME(event_datetime) > '".$eventTime."'";
+
                     try {
+                        $timeObject = DateTime::createFromFormat('H:i', $eventTime);
+                        $tenAM = DateTime::createFromFormat('H:i', '10:00');
+                        $threePM = DateTime::createFromFormat('H:i', '15:00');
+                    
+                        if ($timeObject < $tenAM || $timeObject > $threePM) {
+                            $response = [
+                                "isProcessed" => false,
+                                "msg" => "Invalid requested schedule. Please refer to event schedules."
+                            ];
+                            echo json_encode($response);
+                            return false;
+                        }
+
                         if ($conn->query($dateCountCheck)->num_rows >= 3) {
                             $response = [
                                 "isProcessed" => false,
                                 "msg" => "Requested date is already fully booked."
                             ];
-                            echo json_encode($response);                            
+                            echo json_encode($response);
+                            return false;                        
+                        }
+
+                        if ($conn->query($schedCheck)->num_rows >= 1) {
+                            $response = [
+                                "isProcessed" => false,
+                                "msg" => "Requested schedule is no longer available."
+                            ];
+                            echo json_encode($response);
+                            return false;
+                            
                         } else {
-                            if ($conn->query($schedCheck)->num_rows >= 1) {
+                            if($conn->query($sql)) {
                                 $response = [
-                                    "isProcessed" => false,
-                                    "msg" => "Requested schedule is no longer available."
+                                    "isProcessed" => true,
+                                    "msg" => "Customer successfully updated!"
                                 ];
                                 echo json_encode($response);
+                                
                             } else {
-                                if($conn->query($sql)) {
-                                    $response = [
-                                        "isProcessed" => true,
-                                        "msg" => "Customer successfully updated!"
-                                    ];
-                                    echo json_encode($response);
-                                    
-                                } else {
-                                    $response = [
-                                        "isProcessed" => false,
-                                        "msg" => "Error saving data."
-                                    ];
-                                    echo json_encode($response);
-                                }
+                                $response = [
+                                    "isProcessed" => false,
+                                    "msg" => "Error saving data."
+                                ];
+                                echo json_encode($response);
                             }
                         }
 

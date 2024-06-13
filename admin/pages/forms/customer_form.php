@@ -357,7 +357,7 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
         <?php
         } else {
             ?>
-            <div class="col-lg-6">
+            <div class="col-lg-8">
                 <button class="btn btn-primary" id="print-report">
                     <span>Print</span></button>
                 <button class="btn btn-success" id="customer-save">
