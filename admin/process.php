@@ -61,27 +61,42 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         mobile='".$mobile."', age='".$age."', gender='".$gender."', nickname='".$nickname."', payment_balance='".$balance."', payment_dp='".$downpayment."', payment_amount='".$amount."', favors='".$favors."', cake='".$cake."'
                         WHERE id='".$id."'";
 
-                    // $sql = "UPDATE booking SET cname='".$celebrantName."', name='".$customerName."', rdates='".$reservationDate."', reservation='".$reservationType."', event_datetime='".$eventDateTime."', is_done='".$eventStatus."',
-                    //     mobile='".$mobile."', age='".$age."', gender='".$gender."', nickname='".$nickname."', payment_balance='".$balance."', payment_dp='".$downpayment."', payment_amount='".$amount."',
-                    //     favors='".$favors."', cake='".$cake."', meal='".$meal."', theme='".$theme."'
-                    //     WHERE id='".$id."'";
-                    
-                    // echo $conn->query($sql);
+                    $schedule = DateTime::createFromFormat('Y-m-d\TH:i', $eventDateTime)->format('Y-m-d H:i:s');
+                    $schedCheck = "SELECT * FROM booking WHERE event_datetime LIKE '%".$schedule."%'";
+
+                    $eventDate = DateTime::createFromFormat('Y-m-d\TH:i', $eventDateTime)->format('Y-m-d');
+                    $dateCountCheck = "SELECT * FROM booking WHERE event_datetime LIKE '%".$eventDate."%'";
 
                     try {
-                        if($conn->query($sql)) {
-                            $response = [
-                                "isProcessed" => true,
-                                "msg" => "Customer successfully updated!"
-                            ];
-                            echo json_encode($response);
-                            
-                        } else {
+                        if ($conn->query($dateCountCheck)->num_rows >= 3) {
                             $response = [
                                 "isProcessed" => false,
-                                "msg" => "Error saving data."
+                                "msg" => "Requested date is already fully booked."
                             ];
-                            echo json_encode($response);
+                            echo json_encode($response);                            
+                        } else {
+                            if ($conn->query($schedCheck)->num_rows >= 1) {
+                                $response = [
+                                    "isProcessed" => false,
+                                    "msg" => "Requested schedule is no longer available."
+                                ];
+                                echo json_encode($response);
+                            } else {
+                                if($conn->query($sql)) {
+                                    $response = [
+                                        "isProcessed" => true,
+                                        "msg" => "Customer successfully updated!"
+                                    ];
+                                    echo json_encode($response);
+                                    
+                                } else {
+                                    $response = [
+                                        "isProcessed" => false,
+                                        "msg" => "Error saving data."
+                                    ];
+                                    echo json_encode($response);
+                                }
+                            }
                         }
 
                     } catch(Exception $e) {
@@ -91,7 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         ];
                         echo json_encode($response);
                     }
-
                     break;
                 default:
                     $id = $_POST['id'];
@@ -121,20 +135,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $sql = "INSERT INTO booking(name,cname,mobile,rdates,themes,gender,age,nickname,reservation,favors,cake,meal,payment,agreement,is_done,event_datetime,payment_mode,payment_amount, others, payment_balance, payment_dp)
                         VALUES('".$customerName."','".$celebrantName."','".$mobile."',now(),'".$theme."','".$gender."','".$age."','".$nickname."','".$reservationType."','".$favors."','".$cake."','".$meal."','".$paymentTerms."','".$agreement."','".$eventStatus."','".$eventDateTime."','".$paymentMode."','".$amount."', '".$others."', '".$balance."', '".$downpayment."')";
 
+                    $schedule = DateTime::createFromFormat('Y-m-d\TH:i', $eventDateTime)->format('Y-m-d H:i:s');
+                    $schedCheck = "SELECT * FROM booking WHERE event_datetime LIKE '%".$schedule."%'";
+
                     try {
-                        if($conn->query($sql)) {
-                            $response = [
-                                "isProcessed" => true,
-                                "msg" => "Reservation booked! Our team will contact you the soonest."
-                            ];
-                            echo json_encode($response);
-                            
-                        } else {
+                        if ($conn->query($schedCheck)->num_rows >= 1) {
                             $response = [
                                 "isProcessed" => false,
-                                "msg" => "Error in booking. Try again later."
+                                "msg" => "Requested schedule is no longer available."
                             ];
                             echo json_encode($response);
+                        } else {
+                            if($conn->query($sql)) {
+                                $response = [
+                                    "isProcessed" => true,
+                                    "msg" => "Reservation booked! Our team will contact you the soonest."
+                                ];
+                                echo json_encode($response);
+                                
+                            } else {
+                                $response = [
+                                    "isProcessed" => false,
+                                    "msg" => "Error in booking. Try again later."
+                                ];
+                                echo json_encode($response);
+                            }
                         }
         
                     } catch(Exception $e) {

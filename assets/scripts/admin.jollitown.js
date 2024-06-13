@@ -25,6 +25,21 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
               }, 500);
             });
+        },
+        eventContent: function(arg) {
+            const eventTitle = arg.event.title;
+            const startTime = arg.event.start;
+            const endTime = arg.event.end;
+            // Get the hour part of the start and end times
+            let startHour = new Date(startTime).toLocaleTimeString(undefined, { hour: 'numeric', hour12: true });
+            startHour = startHour.split(" ")[0];
+
+            let endHour = new Date(endTime).toLocaleTimeString(undefined, { hour: 'numeric', hour12: true });
+            endHour = endHour.split(" ");
+            endHour = `${endHour[0]}${endHour[1]}`;
+            const content = `${startHour}-${endHour}(${eventTitle})`;
+
+            return { html: `<div style="text-align: justified; padding: 4px; text-wrap: wrap; font-weight: bold;">${content}</div>` };
         }
     });
     calendar.render();

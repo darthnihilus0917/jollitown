@@ -235,7 +235,12 @@ $fieldDisabled = (!$isAdmin || $process == "delete") ? "disabled" : "";
                     $value = ($field != null) ? $field['meal'] : "";
                     $selected = "";
                     if ($value != "") {
-                        $value = (strpos($value, " - ")) ? explode(" - ", $value)[0] : $value;                  
+                        $hasMeal = (strpos($value, "Meal") !== false) ? true : false;
+                        if (!$hasMeal) {
+                            $value = (strpos($value, " - ")) ? explode(" - ", $value)[0] : $value; 
+                        } else {
+                            $value = (strpos($value, " - ")) ? explode(" - ", $value)[1] : $value; 
+                        }
                         $selected = ($value == $meal[$i]) ? "selected" : "";
                     }
                     ?>
