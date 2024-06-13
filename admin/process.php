@@ -74,6 +74,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $timeObject = DateTime::createFromFormat('H:i', $eventTime);
                         $tenAM = DateTime::createFromFormat('H:i', '10:00');
                         $threePM = DateTime::createFromFormat('H:i', '15:00');
+                        $currentDate = date('Y-m-d');
+
+                        if ($eventDate < $currentDate) {
+                            $response = [
+                                "isProcessed" => false,
+                                "msg" => "Invalid date. Please select a date rather today or moving forward."
+                            ];
+                            echo json_encode($response);
+                            return false;                            
+                        }
                     
                         if ($timeObject < $tenAM || $timeObject > $threePM) {
                             $response = [
@@ -100,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             ];
                             echo json_encode($response);
                             return false;
-                            
+
                         } else {
                             if($conn->query($sql)) {
                                 $response = [
@@ -157,7 +167,45 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     $schedule = DateTime::createFromFormat('Y-m-d\TH:i', $eventDateTime)->format('Y-m-d H:i:s');
                     $schedCheck = "SELECT * FROM booking WHERE event_datetime LIKE '%".$schedule."%'";
 
+                    $eventDate = DateTime::createFromFormat('Y-m-d\TH:i', $eventDateTime)->format('Y-m-d');
+                    $dateCountCheck = "SELECT * FROM booking WHERE event_datetime LIKE '%".$eventDate."%'";
+
+                    $eventTime = DateTime::createFromFormat('Y-m-d\TH:i', $eventDateTime)->format('H:i');
+                    // $timeCheck = "SELECT * FROM booking WHERE TIME(event_datetime) < '".$eventTime."' OR TIME(event_datetime) > '".$eventTime."'";
+
                     try {
+                        $timeObject = DateTime::createFromFormat('H:i', $eventTime);
+                        $tenAM = DateTime::createFromFormat('H:i', '10:00');
+                        $threePM = DateTime::createFromFormat('H:i', '15:00');
+                        $currentDate = date('Y-m-d');
+                        
+                        if ($eventDate < $currentDate) {
+                            $response = [
+                                "isProcessed" => false,
+                                "msg" => "Invalid date. Please select a date rather today or moving forward."
+                            ];
+                            echo json_encode($response);
+                            return false;                            
+                        }
+                    
+                        if ($timeObject < $tenAM || $timeObject > $threePM) {
+                            $response = [
+                                "isProcessed" => false,
+                                "msg" => "Invalid requested schedule. Please refer to event schedules."
+                            ];
+                            echo json_encode($response);
+                            return false;
+                        }
+
+                        if ($conn->query($dateCountCheck)->num_rows >= 3) {
+                            $response = [
+                                "isProcessed" => false,
+                                "msg" => "Requested date is already fully booked."
+                            ];
+                            echo json_encode($response);
+                            return false;                        
+                        }
+
                         if ($conn->query($schedCheck)->num_rows >= 1) {
                             $response = [
                                 "isProcessed" => false,

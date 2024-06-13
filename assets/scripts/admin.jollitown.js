@@ -71,6 +71,10 @@ $(function() {
     }
 
     // CUSTOMER
+    const today = new Date().toISOString().slice(0, 16);
+    const eventDateTime = $("#customer-event-date");
+    eventDateTime.attr("min", "2023-06-13")
+
     const customerSave = $("#customer-save");
     customerSave.on("click", function() {
         const process = $("#process");
@@ -82,7 +86,7 @@ $(function() {
         const nickname = $("#customer-nickname");
         const customerReservationType = $("#customer-reservation-type");
         const customerReservationDate = $("#customer-reservation-date");
-        const eventDateTime = $("#customer-event-date");
+        // const eventDateTime = $("#customer-event-date");
         const evenStatus = $("#event-status");
         const favors = $("#customer-favors");
         const cake = $("#customer-cake");
