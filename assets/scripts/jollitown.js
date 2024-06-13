@@ -439,6 +439,7 @@ $(function () {
     const gender = $("#customer-gender");
     const nickname = $("#customer-nickname");
     const customerReservationType = $("#customer-reservation-type");
+    const customerReservationDate = $("#customer-reservation-date");
     const eventDateTime = $("#customer-event-date");
     const evenStatus = $("#event-status");
     const paymentMode = $("#payment-mode");

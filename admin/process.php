@@ -76,57 +76,158 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         $threePM = DateTime::createFromFormat('H:i', '15:00');
                         $currentDate = date('Y-m-d');
 
-                        if ($eventDate < $currentDate) {
-                            $response = [
-                                "isProcessed" => false,
-                                "msg" => "Invalid date. Please select a date rather today or moving forward."
-                            ];
-                            echo json_encode($response);
-                            return false;                            
-                        }
-                    
-                        if ($timeObject < $tenAM || $timeObject > $threePM) {
-                            $response = [
-                                "isProcessed" => false,
-                                "msg" => "Invalid requested schedule. Please refer to event schedules."
-                            ];
-                            echo json_encode($response);
-                            return false;
-                        }
-
-                        if ($conn->query($dateCountCheck)->num_rows >= 3) {
-                            $response = [
-                                "isProcessed" => false,
-                                "msg" => "Requested date is already fully booked."
-                            ];
-                            echo json_encode($response);
-                            return false;                        
-                        }
-
-                        if ($conn->query($schedCheck)->num_rows >= 1) {
-                            $response = [
-                                "isProcessed" => false,
-                                "msg" => "Requested schedule is no longer available."
-                            ];
-                            echo json_encode($response);
-                            return false;
-
+                        $bookingCount = $conn->query($dateCountCheck);
+                        if ($bookingCount->num_rows >= 3) {
+                            while($row = $bookingCount->fetch_assoc()) {
+                                if ($id == $row['id']) {
+                                    if ($eventDate < $currentDate) {
+                                        $response = [
+                                            "isProcessed" => false,
+                                            "msg" => "Invalid date. Please select a date rather today or moving forward."
+                                        ];
+                                        echo json_encode($response);
+                                        return false;                            
+                                    }
+                                    
+                                    if ($timeObject < $tenAM || $timeObject > $threePM) {
+                                        $response = [
+                                            "isProcessed" => false,
+                                            "msg" => "Invalid requested schedule. Please refer to event schedules."
+                                        ];
+                                        echo json_encode($response);
+                                        return false;
+                                    } 
+                                    
+                                    $schedCount = $conn->query($schedCheck);
+                                    if ($schedCount->num_rows >= 1) {
+                                        while($schedRow = $schedCount->fetch_assoc()) {
+                                            if ($id == $schedRow['id']) {
+                                                if($conn->query($sql)) {
+                                                    $response = [
+                                                        "isProcessed" => true,
+                                                        "msg" => "Customer successfully updated!"
+                                                    ];
+                                                    echo json_encode($response);
+                                                    
+                                                } else {
+                                                    $response = [
+                                                        "isProcessed" => false,
+                                                        "msg" => "Error saving data."
+                                                    ];
+                                                    echo json_encode($response);
+                                                }
+                                            }
+                                            break;
+                                        }
+                                    }                                   
+                                }
+                                break;
+                            }
                         } else {
-                            if($conn->query($sql)) {
-                                $response = [
-                                    "isProcessed" => true,
-                                    "msg" => "Customer successfully updated!"
-                                ];
-                                echo json_encode($response);
-                                
-                            } else {
+                            if ($eventDate < $currentDate) {
                                 $response = [
                                     "isProcessed" => false,
-                                    "msg" => "Error saving data."
+                                    "msg" => "Invalid date. Please select a date rather today or moving forward."
                                 ];
                                 echo json_encode($response);
+                                return false;                            
                             }
+                        
+                            if ($timeObject < $tenAM || $timeObject > $threePM) {
+                                $response = [
+                                    "isProcessed" => false,
+                                    "msg" => "Invalid requested schedule. Please refer to Party schedules."
+                                ];
+                                echo json_encode($response);
+                                return false;
+                            }
+
+                            if ($conn->query($dateCountCheck)->num_rows >= 3) {
+                                $response = [
+                                    "isProcessed" => false,
+                                    "msg" => "Requested date is already fully booked."
+                                ];
+                                echo json_encode($response);
+                                return false;                        
+                            }
+
+                            if ($conn->query($schedCheck)->num_rows >= 1) {
+                                $response = [
+                                    "isProcessed" => false,
+                                    "msg" => "Requested schedule is no longer available."
+                                ];
+                                echo json_encode($response);
+                                return false;
+
+                            } else {
+                                if($conn->query($sql)) {
+                                    $response = [
+                                        "isProcessed" => true,
+                                        "msg" => "Customer successfully updated!"
+                                    ];
+                                    echo json_encode($response);
+                                    
+                                } else {
+                                    $response = [
+                                        "isProcessed" => false,
+                                        "msg" => "Error saving data."
+                                    ];
+                                    echo json_encode($response);
+                                }
+                            }                            
                         }
+
+                        // if ($eventDate < $currentDate) {
+                        //     $response = [
+                        //         "isProcessed" => false,
+                        //         "msg" => "Invalid date. Please select a date rather today or moving forward."
+                        //     ];
+                        //     echo json_encode($response);
+                        //     return false;                            
+                        // }
+                    
+                        // if ($timeObject < $tenAM || $timeObject > $threePM) {
+                        //     $response = [
+                        //         "isProcessed" => false,
+                        //         "msg" => "Invalid requested schedule. Please refer to event schedules."
+                        //     ];
+                        //     echo json_encode($response);
+                        //     return false;
+                        // }
+
+                        // if ($conn->query($dateCountCheck)->num_rows >= 3) {
+                        //     $response = [
+                        //         "isProcessed" => false,
+                        //         "msg" => "Requested date is already fully booked."
+                        //     ];
+                        //     echo json_encode($response);
+                        //     return false;                        
+                        // }
+
+                        // if ($conn->query($schedCheck)->num_rows >= 1) {
+                        //     $response = [
+                        //         "isProcessed" => false,
+                        //         "msg" => "Requested schedule is no longer available."
+                        //     ];
+                        //     echo json_encode($response);
+                        //     return false;
+
+                        // } else {
+                        //     if($conn->query($sql)) {
+                        //         $response = [
+                        //             "isProcessed" => true,
+                        //             "msg" => "Customer successfully updated!"
+                        //         ];
+                        //         echo json_encode($response);
+                                
+                        //     } else {
+                        //         $response = [
+                        //             "isProcessed" => false,
+                        //             "msg" => "Error saving data."
+                        //         ];
+                        //         echo json_encode($response);
+                        //     }
+                        // }
 
                     } catch(Exception $e) {
                         $response = [
@@ -191,7 +292,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         if ($timeObject < $tenAM || $timeObject > $threePM) {
                             $response = [
                                 "isProcessed" => false,
-                                "msg" => "Invalid requested schedule. Please refer to event schedules."
+                                "msg" => "Invalid requested schedule. Please refer to Party schedules."
                             ];
                             echo json_encode($response);
                             return false;
